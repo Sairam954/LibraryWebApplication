@@ -32,61 +32,47 @@ public class LoginCommand implements Command {
 		String password = request.getParameter("password");
 
 		UserService userService = FactoryService.INSTANCE.getUserService();
-		BookService bookService=FactoryService.INSTANCE.getBookService();
+		BookService bookService = FactoryService.INSTANCE.getBookService();
 		User user = null;
-		List<Book> books=new ArrayList<Book>();
+		List<Book> books = new ArrayList<Book>();
 		try {
 			user = userService.getUser(emailId, password);
-		
+
 			HttpSession session = request.getSession();
-		
+
 			session.setAttribute("userName", user.getUserName());
 			session.setAttribute("userType", user.getUserType());
 			session.setAttribute("isLoged", true);
 			session.setMaxInactiveInterval(30 * 60);
 			String language;
 			String lang;
-			try{
-				String locale=(String) session.getAttribute("language");
-				lang=locale;
+			String locale = (String) session.getAttribute("language");
+			lang = locale;
+
+			if (lang.contains("hi_IN")) {
+				language = "Hindi";
+			} else {
+				language = "English";
 			}
-			catch(ClassCastException e)
-			{
-				Locale locale=(Locale)session.getAttribute("language");
-				lang=locale.getDisplayLanguage();
-			}
-			
-			if(lang.contains("hi_IN"))
-			{
-				language="Hindi";
-			}
-			else
-			{
-				language="English";
-			}
-			books=bookService.getBookOfUser(user.getId(), language);
-			session.setAttribute("userId",user.getId());
-			session.setAttribute("books",books);
+			books = bookService.getBookOfUser(user.getId(), language);
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("books", books);
 			Cookie userName = new Cookie("user", user.getUserName());
 			response.addCookie(userName);
 			System.out.println(books.size());
-			if(books.isEmpty())
-			{
-				session.setAttribute("libraryEmpty","You Dont have anything in Your Library");
-			}
-			else
-			{
+			if (books.isEmpty()) {
+				session.setAttribute("libraryEmpty", "You Dont have anything in Your Library");
+			} else {
 				session.removeAttribute("libraryEmpty");
 			}
 			if (user.getUserType() == UserType.USER) {
 				response.encodeRedirectURL("LoginSucessUserPage.jsp");
-				
-				
+
 				response.sendRedirect("LoginSucessUserPage");
 			} else {
 
 				response.encodeRedirectURL("LoginSucessAdminPage.jsp");
-				
+
 				response.sendRedirect("LoginSucessAdminPage");
 			}
 

@@ -21,13 +21,13 @@ public class SearchCommand implements Command {
 	private static final Logger LOG=Logger.getLogger(SearchCommand.class);
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchText=request.getParameter("search");
-		System.out.println("User Searched this"+searchText);
+		
 		HttpSession session = request.getSession(false);
 		int userId=(Integer) session.getAttribute("userId");
 		BookService bookService=FactoryService.INSTANCE.getBookService();
 		try {
 			List<Book> searchedBook=bookService.searchBook(searchText, userId);
-			System.out.println(searchedBook.size());
+			
 			session.setAttribute("books",searchedBook);
 			if(searchedBook.isEmpty())
 			{
