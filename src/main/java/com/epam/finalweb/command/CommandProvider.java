@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import com.epam.finalweb.command.Command;
 import com.epam.finalweb.command.impl.LoginCommand;
 import com.epam.finalweb.command.impl.LogoutCommand;
+import com.epam.finalweb.command.impl.SearchCommand;
 
 
 public class CommandProvider {
@@ -17,6 +18,7 @@ public class CommandProvider {
 		
 		commands.put(AvailableCommand.LOGIN,new LoginCommand());
 		commands.put(AvailableCommand.LOGOUT,new LogoutCommand());
+		commands.put(AvailableCommand.SEARCH,new SearchCommand());
 	}
 	public static CommandProvider getInstance(){
 		

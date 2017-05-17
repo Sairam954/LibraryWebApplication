@@ -22,6 +22,16 @@
 			<jsp-file>/WEB-INF/LoginSucessUserPage.jsp</jsp-file>
 
 		</servlet>
+		<servlet>
+			<servlet-name>SearchPage</servlet-name>
+			<jsp-file>/WEB-INF/searchPage.jsp</jsp-file>
+
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>LoginUserSuccess</servlet-name>
+			<url-pattern>/searchPage</url-pattern>
+			
+		</servlet-mapping>
 		<servlet-mapping>
 			<servlet-name>LoginUserSuccess</servlet-name>
 			<url-pattern>/LoginSucessUserPage</url-pattern>
@@ -43,6 +53,7 @@
 			<url-pattern>/Controller</url-pattern>
 			<url-pattern>/logout</url-pattern>
 			<url-pattern>/Login</url-pattern>
+			<url-pattern>/search</url-pattern>
 			
 			
 		</servlet-mapping>

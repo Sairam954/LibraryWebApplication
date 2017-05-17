@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -18,7 +20,8 @@ public class UserDaoImpl implements UserDao {
 	private static final String USER_DETAILS = "select * from user_details where user_email=? and user_password=? ";
 	private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
 	private static final String EMAIL_VALIDATE = "select exists(select * from user_details where user_email=?)";
-
+	private static final String USER_DETAILS_ALL = "select * from user_details  ";
+	
 	public User getUser(String emailId,String password) throws DaoException {
 		Connection con = JDBCConnection.getConnection();
 
@@ -79,5 +82,8 @@ public class UserDaoImpl implements UserDao {
 
 		
 	}
+	
+		
+	
 
 }
