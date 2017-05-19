@@ -3,7 +3,7 @@ package com.epam.finalweb.command.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -26,7 +26,11 @@ import com.epam.finalweb.service.factory.FactoryService;
 
 public class LoginCommand implements Command {
 	private static final Logger LOG = Logger.getLogger(LoginCommand.class);
-
+	
+	private static final String LOGIN_USERSUCESS_PAGE="LoginSucessUserPage";
+	private static final String LOGIN_ADMINSUCESS_PAGE="LoginSucessAdminPage";
+	
+	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String emailId = request.getParameter("emailId");
 		String password = request.getParameter("password");
@@ -59,7 +63,8 @@ public class LoginCommand implements Command {
 			session.setAttribute("books", books);
 			Cookie userName = new Cookie("user", user.getUserName());
 			response.addCookie(userName);
-			System.out.println(books.size());
+			System.out.println(books.toString());
+			
 			if (books.isEmpty()) {
 				session.setAttribute("libraryEmpty", "You Dont have anything in Your Library");
 			} else {
@@ -68,12 +73,12 @@ public class LoginCommand implements Command {
 			if (user.getUserType() == UserType.USER) {
 				response.encodeRedirectURL("LoginSucessUserPage.jsp");
 
-				response.sendRedirect("LoginSucessUserPage");
+				response.sendRedirect(LOGIN_USERSUCESS_PAGE);
 			} else {
 
 				response.encodeRedirectURL("LoginSucessAdminPage.jsp");
 
-				response.sendRedirect("LoginSucessAdminPage");
+				response.sendRedirect(LOGIN_ADMINSUCESS_PAGE);
 			}
 
 		} catch (ServiceEmptyFieldException e) {

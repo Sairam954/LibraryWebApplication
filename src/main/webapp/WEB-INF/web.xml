@@ -1,99 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-	<display-name>finalweb</display-name>
-	<session-config>
-		<session-timeout>30</session-timeout>
-	</session-config>
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	<servlet>
-		<description></description>
-		<display-name>Controller</display-name>
-		<servlet-name>Controller</servlet-name>
-
-		<servlet-class>com.epam.finalweb.controller.Controller</servlet-class>
-		</servlet>
-		<servlet>
-			<servlet-name>LoginUserSuccess</servlet-name>
-			<jsp-file>/WEB-INF/LoginSucessUserPage.jsp</jsp-file>
-
-		</servlet>
-		<servlet>
-			<servlet-name>SearchPage</servlet-name>
-			<jsp-file>/WEB-INF/searchPage.jsp</jsp-file>
-
-		</servlet>
-		<servlet-mapping>
-			<servlet-name>LoginUserSuccess</servlet-name>
-			<url-pattern>/searchPage</url-pattern>
-			
-		</servlet-mapping>
-		<servlet-mapping>
-			<servlet-name>LoginUserSuccess</servlet-name>
-			<url-pattern>/LoginSucessUserPage</url-pattern>
-			
-		</servlet-mapping>
-		<servlet>
-			<servlet-name>LoginAdminSuccess</servlet-name>
-			<jsp-file>/WEB-INF/LoginSucessAdminPage.jsp</jsp-file>
-
-		</servlet>
-		<servlet-mapping>
-			<servlet-name>LoginAdminSuccess</servlet-name>
-			<url-pattern>/LoginSucessAdminPage</url-pattern>
-			
-		</servlet-mapping>
-	
-		<servlet-mapping>
-			<servlet-name>Controller</servlet-name>
-			<url-pattern>/Controller</url-pattern>
-			<url-pattern>/logout</url-pattern>
-			<url-pattern>/Login</url-pattern>
-			<url-pattern>/search</url-pattern>
-			
-			
-		</servlet-mapping>
-		<error-page>
-			<error-code>401</error-code>
-			<location>/errorPage.html</location>
-		</error-page>
-		<error-page>
-			<error-code>403</error-code>
-			<location>/errorPage.html</location>
-		</error-page>
-		<error-page>
-			<error-code>404</error-code>
-			<location>/errorPage.html</location>
-		</error-page>
-		<error-page>
-			<error-code>500</error-code>
-			<location>/errorPage.html</location>
-		</error-page>
-		<error-page>
-			<error-code>503</error-code>
-			<location>/errorPage.html</location>
-		</error-page>
-		<filter>
-			<filter-name>RequestFilter</filter-name>
-			<filter-class>com.epam.finalweb.filter.RequestFilter</filter-class>
-		</filter>
-		<filter-mapping>
-			<filter-name>RequestFilter</filter-name>
-			<url-pattern>/Login</url-pattern>
-		</filter-mapping>
-		<filter>
-			<display-name>LoginCheckFilter</display-name>
-			<filter-name>LoginCheckFilter</filter-name>
-			<filter-class>com.epam.finalweb.filter.LoginCheckFilter</filter-class>
-		</filter>
-		<filter-mapping>
-			<filter-name>LoginCheckFilter</filter-name>
-			<url-pattern>/Login</url-pattern>
-			
-			
-		</filter-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>finalweb</display-name>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Controller</display-name>
+    <servlet-name>Controller</servlet-name>
+    <servlet-class>com.epam.finalweb.controller.Controller</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoginUserSuccess</servlet-name>
+    <jsp-file>/WEB-INF/LoginSucessUserPage.jsp</jsp-file>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchPage</servlet-name>
+    <jsp-file>/WEB-INF/searchPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginUserSuccess</servlet-name>
+    <url-pattern>/searchPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginUserSuccess</servlet-name>
+    <url-pattern>/LoginSucessUserPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginAdminSuccess</servlet-name>
+    <jsp-file>/WEB-INF/LoginSucessAdminPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginAdminSuccess</servlet-name>
+    <url-pattern>/LoginSucessAdminPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Controller</servlet-name>
+    <url-pattern>/Controller</url-pattern>
+    <url-pattern>/logout</url-pattern>
+    <url-pattern>/Login</url-pattern>
+    <url-pattern>/search</url-pattern>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <exception-type >java.lang.RuntimeException</exception-type>
+    <location>/errorPage.html</location>
+  </error-page>
+ 
+  <error-page>
+    <error-code>401</error-code>
+    <location>/errorPage.html</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/errorPage.html</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorPage.html</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/errorPage.html</location>
+  </error-page>
+  <error-page>
+    <error-code>503</error-code>
+    <location>/errorPage.html</location>
+  </error-page>
+  <filter>
+    <filter-name>RequestFilter</filter-name>
+    <filter-class>com.epam.finalweb.filter.RequestFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>RequestFilter</filter-name>
+    <url-pattern>/Login</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>LoginCheckFilter</display-name>
+    <filter-name>LoginCheckFilter</filter-name>
+    <filter-class>com.epam.finalweb.filter.LoginCheckFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginCheckFilter</filter-name>
+    <url-pattern>/Login</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>com.epam.finalweb.listener.ControllerListener</listener-class>
+  </listener>
 </web-app>

@@ -19,6 +19,7 @@ import com.epam.finalweb.service.factory.FactoryService;
 public class SearchCommand implements Command {
 
 	private static final Logger LOG=Logger.getLogger(SearchCommand.class);
+	private static final String SEARCH_PAGE="searchPage";
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchText=request.getParameter("search");
 		
@@ -39,7 +40,7 @@ public class SearchCommand implements Command {
 				session.removeAttribute("notFound");
 				
 			}
-			response.sendRedirect("searchPage");
+			request.getRequestDispatcher(SEARCH_PAGE).forward(request, response);
 			
 			
 		} catch (ServiceException e) {

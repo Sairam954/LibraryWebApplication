@@ -4,6 +4,7 @@ public enum AvailableCommand {
 
 	LOGIN,
 	LOGOUT,
-	SEARCH
+	SEARCH,
+	REGISTER
 	
 }

@@ -1,4 +1,4 @@
-package com.epam.finalweb.dao;
+package com.epam.finalweb.dao.book;
 
 import java.util.List;
 

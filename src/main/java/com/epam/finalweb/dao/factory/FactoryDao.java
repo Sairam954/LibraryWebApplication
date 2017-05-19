@@ -1,9 +1,9 @@
 package com.epam.finalweb.dao.factory;
 
-import com.epam.finalweb.dao.BookDao;
-import com.epam.finalweb.dao.UserDao;
-import com.epam.finalweb.dao.impl.BookDaoImpl;
-import com.epam.finalweb.dao.impl.UserDaoImpl;
+import com.epam.finalweb.dao.book.BookDao;
+import com.epam.finalweb.dao.book.impl.BookDaoImpl;
+import com.epam.finalweb.dao.user.UserDao;
+import com.epam.finalweb.dao.user.impl.UserDaoImpl;
 
 public enum FactoryDao {
 

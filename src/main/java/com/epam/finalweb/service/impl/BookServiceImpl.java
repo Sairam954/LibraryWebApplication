@@ -3,7 +3,7 @@ package com.epam.finalweb.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.finalweb.dao.BookDao;
+import com.epam.finalweb.dao.book.BookDao;
 import com.epam.finalweb.dao.factory.FactoryDao;
 import com.epam.finalweb.domain.Book;
 import com.epam.finalweb.exception.DaoException;

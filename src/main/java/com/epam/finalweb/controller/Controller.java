@@ -5,15 +5,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.PropertyConfigurator;
 
 import com.epam.finalweb.command.AvailableCommand;
 import com.epam.finalweb.command.Command;
 import com.epam.finalweb.command.CommandProvider;
-import com.epam.finalweb.exception.DaoException;
-import com.epam.finalweb.util.JDBCConnection;
+
 
 /**
  * Servlet implementation class AppController
@@ -29,12 +25,7 @@ public class Controller extends HttpServlet {
 
 	public void init() {
 
-		PropertyConfigurator.configure("src//main//resources//log4jconfig.properties");
-		try {
-			JDBCConnection.init();
-		} catch (DaoException e) {
-
-		}
+		
 	}
 	
 

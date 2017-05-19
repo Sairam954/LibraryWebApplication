@@ -1,8 +1,9 @@
 package com.epam.finalweb.service.impl;
 
-import com.epam.finalweb.dao.UserDao;
 import com.epam.finalweb.dao.factory.FactoryDao;
+import com.epam.finalweb.dao.user.UserDao;
 import com.epam.finalweb.domain.User;
+import com.epam.finalweb.domain.UserRegistrationForm;
 import com.epam.finalweb.exception.DaoException;
 import com.epam.finalweb.exception.ServiceEmailNotValidException;
 import com.epam.finalweb.exception.ServiceEmptyFieldException;
@@ -10,7 +11,7 @@ import com.epam.finalweb.exception.ServiceException;
 
 import com.epam.finalweb.exception.ValidationException;
 import com.epam.finalweb.service.UserService;
-import com.epam.finalweb.util.Validation;
+import com.epam.finalweb.service.Validation;
 
 public class UserServiceImpl implements UserService{
 
@@ -54,5 +55,21 @@ public class UserServiceImpl implements UserService{
 		
 		
 	}
+
+	@Override
+	public void createUser(UserRegistrationForm form) throws ServiceException {
+	
+	UserDao userDao=FactoryDao.INSTANCE.getUserDao();
+	
+	try {
+		userDao.createUser(form);
+	} catch (DaoException e) {
+		throw new  ServiceException("Cannot create User",e);
+	}
+		
+		
+	}
+
+	
 
 }

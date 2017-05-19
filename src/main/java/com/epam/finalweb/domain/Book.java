@@ -48,6 +48,30 @@ public class Book {
 		return description;
 	}
 
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
+	}
+
+	public void setBookAuthor(String bookAuthor) {
+		this.bookAuthor = bookAuthor;
+	}
+
+	public void setBookType(BookType bookType) {
+		this.bookType = bookType;
+	}
+
+	public void setBookLanguage(String bookLanguage) {
+		this.bookLanguage = bookLanguage;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
