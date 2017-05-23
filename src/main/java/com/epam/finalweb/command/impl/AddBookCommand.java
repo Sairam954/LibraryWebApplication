@@ -19,7 +19,8 @@ private static final Logger LOG=Logger.getLogger(AddBookCommand.class);
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		int userId=(int) session.getAttribute("userId");
+		String userID = (String)session.getAttribute("userId");
+		int userId=Integer.parseInt(userID);
 		int bookId=Integer.parseInt(request.getParameter("bookId"));
 				BookService bookService=FactoryService.INSTANCE.getBookService();
 		try {
