@@ -21,8 +21,7 @@ private static final Logger LOG=Logger.getLogger(UserBookCommand.class);
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		String userID = (String)session.getAttribute("userId");
-		int userId=Integer.parseInt(userID);
+		int userId = (int) session.getAttribute("userId");
 		String locale = (String) session.getAttribute("language");
 		BookService bookService=FactoryService.INSTANCE.getBookService();
 		List<Book> books=null;
