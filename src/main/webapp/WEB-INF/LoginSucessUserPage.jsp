@@ -9,7 +9,11 @@
 
 <fmt:setLocale value="${language}"  scope="session"/>
 <fmt:setBundle var="bundle" basename="com.finalweb.bundle.local" />
-
+<fmt:message var="search" bundle="${bundle}" key="local.search" />
+<fmt:message var="logout" bundle="${bundle}" key="local.logout" />
+<fmt:message var="booktitle" bundle="${bundle}" key="local.booktitle" />
+<fmt:message var="author" bundle="${bundle}" key="local.author" />
+<fmt:message var="description" bundle="${bundle}" key="local.description" />
 <html lang="${language}">
 <head>
   
@@ -62,8 +66,7 @@ body {
         <form class="navbar-form" role="search" action="search" >
         <div class="input-group">
         <input type="hidden" name="commandName" value="search" />
-            <input type="text" class="form-control" placeholder="<fmt:message bundle="${bundle}"
-						key="search" />" name="search">
+            <input type="text" class="form-control" placeholder=${search} name="search">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>
@@ -77,8 +80,7 @@ body {
         <ul class="dropdown-menu">
           <li><form class="form-group" action="logout" method="post">
 		<input type="hidden" name="commandName" value="Logout" />
-		<button type="submit"><fmt:message bundle="${bundle}"
-						key="logout" /></button>
+		<button type="submit">${logout}</button>
 	
 	</form></li>
           
@@ -105,16 +107,13 @@ body {
   
     <tr>
       
-      <th><fmt:message bundle="${bundle}"
-						key="BookTitle" /></th>
-      <th><fmt:message bundle="${bundle}"
-						key="Author" /></th>
-      <th><fmt:message bundle="${bundle}"
-						key="Description" /></th>
+      <th>${booktitle}</th>
+      <th>${author}</th>
+      <th>${description}</th>
     </tr>
   </thead>
   <tbody>
-   
+   <c:if test="${newUser!=null}"><h3>Sorry, You don't have books in your Library Why don't we add few </h3></c:if>
 		<c:forEach var="book" items="${books}">
 			<tr>
 				

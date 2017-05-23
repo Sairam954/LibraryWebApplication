@@ -17,11 +17,10 @@ import com.epam.finalweb.command.Command;
 import com.epam.finalweb.domain.Book;
 import com.epam.finalweb.domain.User;
 import com.epam.finalweb.domain.UserType;
-import com.epam.finalweb.exception.ServiceEmailNotValidException;
-import com.epam.finalweb.exception.ServiceEmptyFieldException;
-import com.epam.finalweb.exception.ServiceException;
 import com.epam.finalweb.service.BookService;
 import com.epam.finalweb.service.UserService;
+import com.epam.finalweb.service.exception.ServiceException;
+import com.epam.finalweb.service.exception.ValidationException;
 import com.epam.finalweb.service.factory.FactoryService;
 
 public class LoginCommand implements Command {
@@ -81,17 +80,13 @@ public class LoginCommand implements Command {
 				response.sendRedirect(LOGIN_ADMINSUCESS_PAGE);
 			}
 
-		} catch (ServiceEmptyFieldException e) {
-			LOG.error("Password field cannot be empty or null");
-			request.setAttribute("errorMessage", "Password field cannot be empty or null");
-		} catch (ServiceEmailNotValidException e) {
-			LOG.error("Email specified is not valid");
-			request.setAttribute("errorMessage", "Email specified is not valid");
-
-		} catch (ServiceException e) {
+		}catch (ServiceException e) {
 			LOG.error("Wrong Password ");
 			request.setAttribute("errorMessage", "Wrong Password Please Enter Correct Password");
 
+		} catch (ValidationException e) {
+			request.setAttribute("errorMessage", "Email is  not valid ");
+			
 		}
 		if (user == null) {
 

@@ -12,11 +12,10 @@ import org.apache.log4j.Logger;
 import com.epam.finalweb.dao.ConnectionPool;
 import com.epam.finalweb.dao.book.BookDao;
 import com.epam.finalweb.dao.book.BookDaoUtil;
+import com.epam.finalweb.dao.exception.DaoException;
+import com.epam.finalweb.dao.exception.PoolException;
 import com.epam.finalweb.domain.Book;
 import com.epam.finalweb.domain.BookType;
-
-import com.epam.finalweb.exception.DaoException;
-import com.epam.finalweb.exception.PoolException;
 
 public class BookDaoImpl implements BookDao {
 

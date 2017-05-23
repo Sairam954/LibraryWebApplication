@@ -3,7 +3,7 @@ package com.epam.finalweb.service;
 import java.util.List;
 
 import com.epam.finalweb.domain.Book;
-import com.epam.finalweb.exception.ServiceException;
+import com.epam.finalweb.service.exception.ServiceException;
 
 public interface BookService {
 

@@ -5,8 +5,8 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.log4j.PropertyConfigurator;
 
-import com.epam.finalweb.exception.ServiceException;
 import com.epam.finalweb.service.PoolService;
+import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.factory.FactoryService;
 
 /**

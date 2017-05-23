@@ -1,8 +1,8 @@
 package com.epam.finalweb.dao.user;
 
+import com.epam.finalweb.dao.exception.DaoException;
 import com.epam.finalweb.domain.User;
 import com.epam.finalweb.domain.UserRegistrationForm;
-import com.epam.finalweb.exception.DaoException;
 
 public interface UserDao {
 

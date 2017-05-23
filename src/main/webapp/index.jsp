@@ -10,6 +10,13 @@
 
 <fmt:setLocale value="${language}" />
 <fmt:setBundle var="bundle" basename="com.finalweb.bundle.local" />
+<fmt:message var="login"	bundle="${bundle}" key="local.login" />
+<fmt:message var="register" bundle="${bundle}" key="local.register" />
+<fmt:message var="email" bundle="${bundle}" key="local.emailid"  />
+<fmt:message var="username" bundle="${bundle}" key="local.username" />
+<fmt:message var="phonenumber" bundle="${bundle}" key="local.phonenumber" />
+<fmt:message var="password" bundle="${bundle}" key="local.password" />
+
 <html lang="${language}">
 <head>
 <title>Library Home</title>
@@ -181,12 +188,10 @@ body {
 					<div class="panel-heading">
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="#" class="active" id="login-form-link"><fmt:message
-										bundle="${bundle}" key="login" /> </a>
+								<a href="#" class="active" id="login-form-link">${login} </a>
 							</div>
-							<div class="col-xs-6">
-								<a href="#" id="register-form-link"><fmt:message bundle="${bundle}"
-						key="register" /></a>
+							<div class="col-xs-6 ">
+								<a href="#" id="register-form-link">${register}</a>
 							</div>
 						</div>
 						<hr>
@@ -199,15 +204,14 @@ body {
 									<div class="form-group">
 										<input type="text" name="emailId" id="emailId" tabindex="1"
 											class="form-control"
-											placeholder=<fmt:message bundle="${bundle}"
-						key="emailid" />
+											placeholder= ${email}
 											value="" required>
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password"
 											tabindex="2" class="form-control"
-											placeholder=<fmt:message bundle="${bundle}"
-						key="password" />
+											placeholder=${password} 
+											value=""
 											required>
 									</div>
 
@@ -216,8 +220,7 @@ body {
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="login-submit" id="login-submit"
 													tabindex="4" class="form-control btn btn-login"
-													value=<fmt:message bundle="${bundle}"
-						key="login" />>
+													value=${login}>
 											</div>
 										</div>
 									</div>
@@ -233,26 +236,27 @@ body {
 									role="form" style="display: none;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1"
-											class="form-control" placeholder=<fmt:message bundle="${bundle}"
-						key="username" /> value="">
+											class="form-control"
+											placeholder=${username}
+											value="">
 									</div>
 									<div class="form-group">
 										<input type="email" name="emailid" id="email" tabindex="1"
-											class="form-control" placeholder=<<fmt:message bundle="${bundle}"
-						key="emailid" /> value=""
-											required>
+											class="form-control"
+											placeholder=${email}
+											value="" required>
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password"
-											tabindex="2" class="form-control" placeholder=<fmt:message bundle="${bundle}"
-						key="password" />
+											tabindex="2" class="form-control"
+											placeholder=${password}
 											required>
 									</div>
 
 									<div class="form-group">
 										<input type="integer" name="phonenumber" id="phonenumber"
-											tabindex="2" class="form-control" placeholder=<fmt:message bundle="${bundle}"
-						key="phonenumber" />
+											tabindex="2" class="form-control"
+											placeholder=${phonenumber}
 											required>
 									</div>
 									<div>
@@ -263,8 +267,8 @@ body {
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="register-submit"
 													id="register-submit" tabindex="4"
-													class="form-control btn btn-register" value=<fmt:message bundle="${bundle}"
-						key="register" /> >
+													class="form-control btn btn-register"
+													value=${register}>
 											</div>
 										</div>
 									</div>

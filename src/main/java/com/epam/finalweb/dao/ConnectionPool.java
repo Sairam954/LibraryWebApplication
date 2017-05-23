@@ -10,14 +10,14 @@ import java.util.concurrent.BlockingQueue;
 
 import org.apache.log4j.Logger;
 
-import com.epam.finalweb.exception.PoolException;
+import com.epam.finalweb.dao.exception.PoolException;
 
 public class ConnectionPool {
 
 	private static volatile ConnectionPool instance;
 	private static BlockingQueue<Connection> availableConnection;
 	private static BlockingQueue<Connection> busyConnection;
-	private static final int maxPoolSize = 7;
+	private static final int maxPoolSize = 3;
 	private static final Logger LOG = Logger.getLogger(ConnectionPool.class);
 
 	private ConnectionPool() {

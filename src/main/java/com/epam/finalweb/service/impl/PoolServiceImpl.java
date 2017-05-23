@@ -1,9 +1,9 @@
 package com.epam.finalweb.service.impl;
 
 import com.epam.finalweb.dao.ConnectionPool;
-import com.epam.finalweb.exception.PoolException;
-import com.epam.finalweb.exception.ServiceException;
+import com.epam.finalweb.dao.exception.PoolException;
 import com.epam.finalweb.service.PoolService;
+import com.epam.finalweb.service.exception.ServiceException;
 
 public class PoolServiceImpl implements PoolService {
 

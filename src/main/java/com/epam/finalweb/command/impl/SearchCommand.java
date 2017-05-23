@@ -12,8 +12,8 @@ import org.apache.log4j.Logger;
 
 import com.epam.finalweb.command.Command;
 import com.epam.finalweb.domain.Book;
-import com.epam.finalweb.exception.ServiceException;
 import com.epam.finalweb.service.BookService;
+import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.factory.FactoryService;
 
 public class SearchCommand implements Command {

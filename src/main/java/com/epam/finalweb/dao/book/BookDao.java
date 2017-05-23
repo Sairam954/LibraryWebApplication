@@ -2,8 +2,8 @@ package com.epam.finalweb.dao.book;
 
 import java.util.List;
 
+import com.epam.finalweb.dao.exception.DaoException;
 import com.epam.finalweb.domain.Book;
-import com.epam.finalweb.exception.DaoException;
 
 public interface BookDao {
 

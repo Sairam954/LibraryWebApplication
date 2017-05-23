@@ -1,4 +1,4 @@
-package com.epam.finalweb.exception;
+package com.epam.finalweb.service.exception;
 
 public class ServiceEmptyFieldException extends Exception{
 

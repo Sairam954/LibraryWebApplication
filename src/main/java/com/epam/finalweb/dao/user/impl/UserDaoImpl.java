@@ -9,14 +9,13 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.epam.finalweb.dao.ConnectionPool;
-
+import com.epam.finalweb.dao.exception.DaoException;
+import com.epam.finalweb.dao.exception.PoolException;
 import com.epam.finalweb.dao.user.UserDao;
 import com.epam.finalweb.dao.user.UserDaoUtil;
 import com.epam.finalweb.domain.User;
 import com.epam.finalweb.domain.UserRegistrationForm;
 import com.epam.finalweb.domain.UserType;
-import com.epam.finalweb.exception.DaoException;
-import com.epam.finalweb.exception.PoolException;
 
 
 public class UserDaoImpl implements UserDao {

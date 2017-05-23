@@ -1,4 +1,4 @@
-package com.epam.finalweb.exception;
+package com.epam.finalweb.dao.exception;
 
 public class DaoException extends Exception {
 
