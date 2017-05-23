@@ -3,10 +3,14 @@ package com.epam.finalweb.command;
 import java.util.EnumMap;
 
 import com.epam.finalweb.command.Command;
+import com.epam.finalweb.command.impl.AddBookCommand;
+import com.epam.finalweb.command.impl.AllBookCommand;
 import com.epam.finalweb.command.impl.LoginCommand;
 import com.epam.finalweb.command.impl.LogoutCommand;
 import com.epam.finalweb.command.impl.RegisterCommand;
+import com.epam.finalweb.command.impl.RemoveBookCommand;
 import com.epam.finalweb.command.impl.SearchCommand;
+import com.epam.finalweb.command.impl.UserBookCommand;
 
 
 
@@ -22,6 +26,10 @@ public class CommandProvider {
 		commands.put(AvailableCommand.LOGOUT,new LogoutCommand());
 		commands.put(AvailableCommand.SEARCH,new SearchCommand());
 		commands.put(AvailableCommand.REGISTER,new RegisterCommand());
+		commands.put(AvailableCommand.ALLBOOK,new AllBookCommand());
+		commands.put(AvailableCommand.ADDBOOK,new AddBookCommand());
+		commands.put(AvailableCommand.REMOVEBOOK,new RemoveBookCommand());
+		commands.put(AvailableCommand.USERBOOK,new UserBookCommand());
 	}
 	
 	private static class CommandProviderHolder{

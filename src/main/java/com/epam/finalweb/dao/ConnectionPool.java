@@ -14,7 +14,7 @@ import com.epam.finalweb.dao.exception.PoolException;
 
 public class ConnectionPool {
 
-	private static volatile ConnectionPool instance;
+	
 	private static BlockingQueue<Connection> availableConnection;
 	private static BlockingQueue<Connection> busyConnection;
 	private static final int maxPoolSize = 3;

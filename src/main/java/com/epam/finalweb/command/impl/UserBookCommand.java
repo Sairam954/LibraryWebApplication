@@ -16,39 +16,28 @@ import com.epam.finalweb.service.BookService;
 import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.factory.FactoryService;
 
-public class SearchCommand implements Command {
-
-	private static final Logger LOG=Logger.getLogger(SearchCommand.class);
-	private static final String SEARCH_PAGE="searchPage";
+public class UserBookCommand implements Command {
+private static final Logger LOG=Logger.getLogger(UserBookCommand.class);
+	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String searchText=request.getParameter("search");
-		
 		HttpSession session = request.getSession(false);
-		int userId=(Integer) session.getAttribute("userId");
+		int userId = (int) session.getAttribute("userId");
+		String locale = (String) session.getAttribute("language");
 		BookService bookService=FactoryService.INSTANCE.getBookService();
+		List<Book> books=null;
+		
 		try {
-			List<Book> searchedBook=bookService.searchBook(searchText, userId);
-			
-			request.setAttribute("searchbooks",searchedBook);
-			if(searchedBook.isEmpty())
-			{
-				session.setAttribute("notFound","Sorry Search Book Not Found");
+			books = bookService.getBookOfUser(userId, locale);
+			if (books.isEmpty()) {
+				session.setAttribute("libraryEmpty", "You Dont have anything in Your Library");
+			} else {
+				session.removeAttribute("libraryEmpty");
 			}
-			else
-			{
-			
-				session.removeAttribute("notFound");
-				
-			}
-			request.getRequestDispatcher(SEARCH_PAGE).forward(request, response);
-			
-			
+			request.setAttribute("userBooks", books);
+			request.getRequestDispatcher("userBookPage").forward(request, response);
 		} catch (ServiceException e) {
 			LOG.error("Service Exception",e);
-			
 		}
-		
-		
 		
 	}
 

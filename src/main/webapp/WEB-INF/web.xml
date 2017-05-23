@@ -21,14 +21,31 @@
     <servlet-name>SearchPage</servlet-name>
     <jsp-file>/WEB-INF/searchPage.jsp</jsp-file>
   </servlet>
+  <servlet>
+    <servlet-name>AllBookPage</servlet-name>
+    <jsp-file>/WEB-INF/allBookPage.jsp</jsp-file>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>LoginUserSuccess</servlet-name>
+    <servlet-name>userBookPage</servlet-name>
+    <url-pattern>/userBookPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>userBookPage</servlet-name>
+    <jsp-file>/WEB-INF/userBookPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllBookPage</servlet-name>
+    <url-pattern>/allBookPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchPage</servlet-name>
     <url-pattern>/searchPage</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LoginUserSuccess</servlet-name>
     <url-pattern>/LoginSucessUserPage</url-pattern>
   </servlet-mapping>
+ 
   <servlet>
     <servlet-name>LoginAdminSuccess</servlet-name>
     <jsp-file>/WEB-INF/LoginSucessAdminPage.jsp</jsp-file>
@@ -44,6 +61,7 @@
     <url-pattern>/Login</url-pattern>
     <url-pattern>/search</url-pattern>
     <url-pattern>/register</url-pattern>
+     <url-pattern>/user</url-pattern>
   </servlet-mapping>
   <error-page>
     <exception-type >java.lang.RuntimeException</exception-type>

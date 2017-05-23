@@ -47,17 +47,12 @@ public class LoginCommand implements Command {
 			session.setAttribute("userType", user.getUserType());
 			session.setAttribute("isLoged", true);
 			session.setMaxInactiveInterval(30 * 60);
-			String language;
-			String lang;
+			
 			String locale = (String) session.getAttribute("language");
-			lang = locale;
+			
 
-			if (lang.contains("hi_IN")) {
-				language = "Hindi";
-			} else {
-				language = "English";
-			}
-			books = bookService.getBookOfUser(user.getId(), language);
+			
+			books = bookService.getBookOfUser(user.getId(), locale);
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("books", books);
 			Cookie userName = new Cookie("user", user.getUserName());

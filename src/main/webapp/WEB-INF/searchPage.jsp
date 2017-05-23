@@ -9,6 +9,17 @@
 
 <fmt:setLocale value="${language}"  scope="session"/>
 <fmt:setBundle var="bundle" basename="com.finalweb.bundle.local" />
+<fmt:message var="search" bundle="${bundle}" key="local.search" />
+<fmt:message var="logout" bundle="${bundle}" key="local.logout" />
+<fmt:message var="booktitle" bundle="${bundle}" key="local.booktitle" />
+<fmt:message var="author" bundle="${bundle}" key="local.author" />
+<fmt:message var="description" bundle="${bundle}"
+	key="local.description" />
+<fmt:message var="action" bundle="${bundle}" key="local.action" />
+<fmt:message var="addbook" bundle="${bundle}" key="local.addbook" />
+<fmt:message var="moreinfo" bundle="${bundle}" key="local.moreinfo" />
+<fmt:message var="removebook" bundle="${bundle}" key="local.removebook" />
+
 
 <html lang="${language}">
 <head>
@@ -62,7 +73,7 @@ body {
         <form class="navbar-form" role="search" action="search" >
         <div class="input-group">
         <input type="hidden" name="commandName" value="search" />
-            <input type="text" class="form-control" placeholder="Search" name="search">
+            <input type="text" class="form-control" placeholder="${search}" name="search">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>
@@ -76,8 +87,7 @@ body {
         <ul class="dropdown-menu">
           <li><form class="form-group" action="logout" method="post">
 		<input type="hidden" name="commandName" value="Logout" />
-		<button type="submit"><fmt:message bundle="${bundle}"
-						key="logout" /></button>
+		<button type="submit">${logout}</button>
 	
 	</form></li>
           
@@ -104,19 +114,63 @@ body {
   
     <tr>
       
-      <th>Book Title</th>
-      <th>Author</th>
-      <th>Description</th>
+      <th>${booktitle}</th>
+				<th>${author}</th>
+				<th>${moreinfo}</th>
+      
     </tr>
   </thead>
   <tbody>
    
-		<c:forEach var="searchBook" items="${searchBooks}">
+		<c:forEach var="searchBook" items="${searchbooks}">
 			<tr>
 				
 				<td>${searchBook.bookTitle}</td>
 				<td>${searchBook.bookAuthor}</td>
-				<td>${searchBook.description}</td>
+				<td>
+
+							<button type="button" class="btn btn-info btn-sm"
+								data-toggle="modal" data-target="#myModal">More Info</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog">
+
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Book Details</h4>
+										</div>
+										<div class="modal-body">
+											<table>
+												<td>
+												<tr>
+													<h5>Book Title :${searchBook.bookTitle}</h5>
+												</tr>
+												<tr>
+													<h5>Auther name :${searchBook.bookAuthor}</h5>
+												</tr>
+												<tr>
+													<h5>Book Type:${searchBook.bookType}</h5>
+												</tr>
+												<tr>
+													<h5>Book Description :${searchBook.description}</h5>
+												</tr>
+												</td>
+											</table>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</td>
+				
 			</tr>
 
 		</c:forEach>

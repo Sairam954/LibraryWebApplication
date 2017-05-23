@@ -7,8 +7,7 @@ import com.epam.finalweb.domain.User;
 import com.epam.finalweb.domain.UserRegistrationForm;
 import com.epam.finalweb.service.UserService;
 import com.epam.finalweb.service.Validation;
-import com.epam.finalweb.service.exception.ServiceEmailNotValidException;
-import com.epam.finalweb.service.exception.ServiceEmptyFieldException;
+
 import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.exception.ValidationException;
 

@@ -2,6 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <c:set var="language" value="${language}" scope="session" />
 
 <fmt:setLocale value="${language}" scope="session" />
@@ -13,6 +15,7 @@
 <fmt:message var="description" bundle="${bundle}"
 	key="local.description" />
 <fmt:message var="action" bundle="${bundle}" key="local.action" />
+<fmt:message var="addbook" bundle="${bundle}" key="local.addbook" />
 <fmt:message var="moreinfo" bundle="${bundle}" key="local.moreinfo" />
 <fmt:message var="removebook" bundle="${bundle}" key="local.removebook" />
 
@@ -54,20 +57,19 @@ body {
 		<ul class="nav navbar-nav">
 
 
-			<!-- <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="">English</a></li>
-          <li><a href="">Hindi</a></li>
-        
-        </ul>
-      </li> -->
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown">Language<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="">English</a></li>
+					<li><a href="">Hindi</a></li>
+
+				</ul></li>
 		</ul>
 		<div class="col-sm-3 col-md-3">
 			<form class="navbar-form" role="search" action="search">
 				<div class="input-group">
 					<input type="hidden" name="commandName" value="search" /> <input
-						type="text" class="form-control" placeholder="${search}"
+						type="text" class="form-control" placeholder="${search} "
 						name="search">
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">
@@ -91,49 +93,37 @@ body {
 				</ul></li>
 		</ul>
 	</div>
-	<div></div>
+<div class="container">
+		<a href="user?commandName=userBook"><button type="button"
+				class="btn btn-primary  btn-lg pull-right">Your Books</button> </a>
+	</div>
 
 
 
 	<!-- /.navbar-collapse --> </nav>
+
+
 	<div class="container">
-		<a href="user?commandName=allbook"><button type="button"
-				class="btn btn-primary  btn-lg pull-right">Show All Books</button> </a>
-	</div>
+		<h2>All Books</h2>
+		<table class="table table-hover">
+			<thead class="thead-inverse table-active">
 
-
-	<div class="container  text-danger">
-		<h4>
-			<c:if test="${libraryEmpty!=null}">${libraryEmpty}</c:if>
-		</h4>
-	</div>
-	<div class="container">
-		<c:if test="${newUser!=null}">
-			<h3>Sorry, You don't have books in your Library Why don't we add
-				few</h3>
-		</c:if>
-	</div>
-
-
-<div class="container">
-	<table class="table table-hover">
-		<thead class="thead-inverse table-active">
-
-			<tr>
-
-				<th>${booktitle}</th>
-				<th>${author}</th>
-				<th>${moreinfo}</th>
-				<th>${action}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="book" items="${books}">
 				<tr>
 
-					<td>${book.bookTitle}</td>
-					<td>${book.bookAuthor}</td>
-					<td>
+					<th>${booktitle}</th>
+					<th>${author}</th>
+					<th>${moreinfo}</th>
+					<th>${action}</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<c:forEach var="book" items="${allBooks}">
+					<tr>
+
+						<td>${book.book.bookTitle}</td>
+						<td>${book.book.bookAuthor}</td>
+						<td>
 
 							<button type="button" class="btn btn-info btn-sm"
 								data-toggle="modal" data-target="#myModal">More Info</button>
@@ -152,16 +142,16 @@ body {
 											<table>
 												<td>
 												<tr>
-													<h5>Book Title :${book.bookTitle}</h5>
+													<h5>Book Title :${book.book.bookTitle}</h5>
 												</tr>
 												<tr>
-													<h5>Auther name :${book.bookAuthor}</h5>
+													<h5>Auther name :${book.book.bookAuthor}</h5>
 												</tr>
 												<tr>
-													<h5>Book Type:${book.bookType}</h5>
+													<h5>Book Type:${book.book.bookType}</h5>
 												</tr>
 												<tr>
-													<h5>Book Description :${book.description}</h5>
+													<h5>Book Description :${book.book.description}</h5>
 												</tr>
 												</td>
 											</table>
@@ -176,16 +166,29 @@ body {
 							</div>
 
 						</td>
-					<td><a
-						href="user?commandName=removebook&bookId=${book.bookId}"><button
-								type="button" class="btn btn-danger btn-sm ">${removebook}</button>
-					</a></td>
+						<td><c:set var="userList" value="${book.userList}" /> <c:set
+								var="userId" value="${userId}" /> <c:choose>
+								<c:when test="${!fn:contains(userList, userId)}">
+									<a href="user?commandName=addbook&bookId=${book.book.bookId}"><button
+											type="button" class="btn btn-success  btn-sm ">Add Book</button>
+									</a></td>
+						</c:when>
 
-				</tr>
+						<c:otherwise>
+								You have it in your Library
+						</c:otherwise>
+						</c:choose>
+						<c:if test="">
 
-			</c:forEach>
-		</tbody>
-	</table>
+						</c:if>
+
+					</tr>
+
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
+
+
 </body>
 </html>

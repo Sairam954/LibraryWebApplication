@@ -128,7 +128,7 @@ body {
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="book" items="${books}">
+			<c:forEach var="book" items="${userBooks}">
 				<tr>
 
 					<td>${book.bookTitle}</td>

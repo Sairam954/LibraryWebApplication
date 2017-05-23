@@ -5,6 +5,10 @@ public enum AvailableCommand {
 	LOGIN,
 	LOGOUT,
 	SEARCH,
-	REGISTER
+	REGISTER,
+	ALLBOOK,
+	ADDBOOK,
+	USERBOOK,
+	REMOVEBOOK
 	
 }
