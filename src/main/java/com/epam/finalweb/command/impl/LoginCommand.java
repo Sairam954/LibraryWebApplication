@@ -53,7 +53,7 @@ public class LoginCommand implements Command {
 
 			
 			books = bookService.getBookOfUser(user.getId(), locale);
-			session.setAttribute("userId", user.getId());
+			session.setAttribute("userId", String.valueOf(user.getId()));
 			session.setAttribute("books", books);
 			Cookie userName = new Cookie("user", user.getUserName());
 			response.addCookie(userName);
