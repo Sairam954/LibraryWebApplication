@@ -24,7 +24,8 @@ public class SearchCommand implements Command {
 		String searchText=request.getParameter("search");
 		
 		HttpSession session = request.getSession(false);
-		int userId=(Integer) session.getAttribute("userId");
+		String userID=(String) session.getAttribute("userId");
+		int userId=Integer.parseInt(userID);
 		BookService bookService=FactoryService.INSTANCE.getBookService();
 		try {
 			List<Book> searchedBook=bookService.searchBook(searchText, userId);
