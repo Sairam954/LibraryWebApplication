@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -131,7 +132,7 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<UserBook> getAllBook(String language) throws DaoException {
+	public List<UserBook> getAllBook(String language,int userId) throws DaoException {
 
 		Connection con = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -156,10 +157,23 @@ public class BookDaoImpl implements BookDao {
 				book.setBookType(BookType.valueOf(rs.getString(BOOK_TYPE).toUpperCase()));
 				book.setBookLanguage(rs.getString(BOOK_LANGUAGE));
 				book.setDescription(rs.getString(BOOK_DESCRIPTION));
-				userBook = new UserBook(book,rs.getString(USERS));
+				String users=rs.getString(USERS);
+			
+				if(users!=null){
+					
+					userBook = new UserBook(book,rs.getString(USERS),Arrays.asList(users.split(",")).contains(userId+""));					
+				}
+				else
+				{
+					userBook = new UserBook(book,rs.getString(USERS),false);					
+					
+				}
+				
+				
 				
 				books.add(userBook);
 			}
+			
 
 		} catch (SQLException e) {
 			throw new DaoException("Cannot create Prepared Statement", e);

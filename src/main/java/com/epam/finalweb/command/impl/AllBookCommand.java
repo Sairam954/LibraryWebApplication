@@ -30,8 +30,10 @@ public class AllBookCommand implements Command {
 
 		BookService bookService = FactoryService.INSTANCE.getBookService();
 		List<UserBook> books = null;
+		String id=(String)session.getAttribute("userId"); 
+		int userId=Integer.parseInt(id);
 		try {
-			books = bookService.getAllBook(locale);
+			books = bookService.getAllBook(locale,userId);
 			request.setAttribute("allBooks", books);
 
 			request.getRequestDispatcher(ALLBOOKPAGE).forward(request, response);

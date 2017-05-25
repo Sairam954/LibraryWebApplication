@@ -4,17 +4,27 @@ public class UserBook {
 
 	Book book;
 	String userList;
-	
+	Boolean isAdded;
 	public UserBook(){
 		
 		
 	}
 	
-	public UserBook(Book book, String userList) {
+	public UserBook(Book book, String userList,Boolean isAdded) {
 		
 		this.book = book;
 		this.userList = userList;
+		this.isAdded=isAdded;
 	}
+	
+	public Boolean getIsAdded() {
+		return isAdded;
+	}
+
+	public void setIsAdded(Boolean isAdded) {
+		this.isAdded = isAdded;
+	}
+
 	public Book getBook() {
 		return book;
 	}
@@ -61,7 +71,7 @@ public class UserBook {
 
 	@Override
 	public String toString() {
-		return "UserBook [book=" + book + ", userList=" + userList + "]";
+		return "UserBook [book=" + book + ", userList=" + userList +isAdded+ "]";
 	}
 	
 

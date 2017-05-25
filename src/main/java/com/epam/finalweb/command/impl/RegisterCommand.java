@@ -26,6 +26,7 @@ public class RegisterCommand implements Command {
 	private static final String NEWUSER="newUser";
 	private static final String ERRORMESSAGE="errorMessage";
 	private static final String INDEXPAGE="index.jsp"; 
+	private static final String USERID="userId";
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -46,7 +47,8 @@ public class RegisterCommand implements Command {
 			HttpSession session = request.getSession();
 
 			session.setAttribute(USERNAME, userName);
-			session.setAttribute(USERTYPE, UserType.USER);
+			session.setAttribute(USERID, userName);
+			session.setAttribute(USERTYPE, UserType.USER.toString().toLowerCase());
 			session.setAttribute(ISLOGED, true);
 			session.setAttribute(NEWUSER, true);
 			response.sendRedirect(LOGIN_USERSUCESS_PAGE);

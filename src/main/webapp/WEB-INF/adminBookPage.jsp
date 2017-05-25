@@ -243,9 +243,9 @@ label {
 									type="button" class="btn btn-danger btn-sm ">${deletebook}</button>
 						</a>
 							<button type="button" class="btn btn-primary btn-sm"
-								data-toggle="modal" data-target="#${book.bookTitle}">Update
+								data-toggle="modal" data-target="#update${book.bookId}">Update
 								Book</button>
-							<div class="modal fade" id="${book.bookTitle}" role="dialog">
+							<div class="modal fade" id="update${book.bookId}" role="dialog">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->

@@ -168,9 +168,8 @@ body {
 							</div>
 
 						</td>
-						<td><c:set var="userList" value="${book.userList}" /> <c:set
-								var="userId" value="${userId}" /> <c:choose>
-								<c:when test="${!fn:contains(userList, userId)}">
+						<td> <c:choose>
+								<c:when test="${book.isAdded==false}">
 									<a href="user?commandName=addbook&bookId=${book.book.bookId}"><button
 											type="button" class="btn btn-success  btn-sm ">Add
 											Book</button> </a></td>

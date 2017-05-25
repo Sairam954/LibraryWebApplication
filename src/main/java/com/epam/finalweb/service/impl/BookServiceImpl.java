@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<UserBook> getAllBook(String locale) throws ServiceException {
+	public List<UserBook> getAllBook(String locale,int userId) throws ServiceException {
 		String language;
 		if (locale.contains("hi_IN")) {
 			language = "Hindi";
@@ -59,7 +59,7 @@ public class BookServiceImpl implements BookService {
 		try {
 
 			List<UserBook> allBooks = null;
-			allBooks = bookDao.getAllBook(language);
+			allBooks = bookDao.getAllBook(language,userId);
 			return allBooks;
 
 		} catch (DaoException e) {
