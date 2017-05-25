@@ -9,7 +9,9 @@ import com.epam.finalweb.dao.factory.FactoryDao;
 import com.epam.finalweb.domain.Book;
 import com.epam.finalweb.domain.UserBook;
 import com.epam.finalweb.service.BookService;
+import com.epam.finalweb.service.Validation;
 import com.epam.finalweb.service.exception.ServiceException;
+import com.epam.finalweb.service.exception.ValidationException;
 
 public class BookServiceImpl implements BookService {
 
@@ -86,6 +88,63 @@ public class BookServiceImpl implements BookService {
 			throw new ServiceException("Cannot remove Book to user Library", e);
 		}
 
+	}
+
+	@Override
+	public void createBook(Book book) throws ServiceException, ValidationException {
+	
+		System.out.println("author"+book.getBookAuthor());
+		Validation.validateNewBook(book);
+		BookDao bookDao = FactoryDao.INSTANCE.getBookDao();
+		try {
+			bookDao.createBook(book);
+		} catch (DaoException e) {
+			throw new ServiceException("Cannot create Book to user Library", e);
+		}
+
+		
+		
+	}
+	@Override
+	public List<Book> getAllBookAdmin(String locale) throws ServiceException {
+		String language;
+		if (locale.contains("hi_IN")) {
+			language = "Hindi";
+		} else {
+			language = "English";
+		}
+
+		BookDao bookDao = FactoryDao.INSTANCE.getBookDao();
+		try {
+
+			List<Book> allBooks = null;
+			allBooks = bookDao.getAllBookAdmin(language);
+			return allBooks;
+
+		} catch (DaoException e) {
+			throw new ServiceException("Cannot get Books of user", e);
+		}
+	}
+
+	@Override
+	public void deleteBook(int bookId) throws ServiceException {
+		BookDao bookDao = FactoryDao.INSTANCE.getBookDao();
+		try {
+			bookDao.deleteBook(bookId);
+		} catch (DaoException e) {
+			throw new ServiceException("Cannot Delete Book ", e);
+		}
+	}
+
+	@Override
+	public void updateBook(Book book) throws ServiceException, ValidationException {
+		Validation.validateNewBook(book);
+		BookDao bookDao = FactoryDao.INSTANCE.getBookDao();
+		try {
+			bookDao.updateBook(book);
+		} catch (DaoException e) {
+			throw new ServiceException("Cannot create Book to user Library", e);
+		}
 	}
 
 }

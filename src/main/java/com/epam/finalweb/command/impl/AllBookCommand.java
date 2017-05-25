@@ -19,24 +19,26 @@ import com.epam.finalweb.service.factory.FactoryService;
 
 public class AllBookCommand implements Command {
 	private static Logger LOG = Logger.getLogger(AllBookCommand.class);
+	private static final String ALLBOOKPAGE = "allBookPage";
+	private static final String LANGUAGE = "language";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
-		String locale = (String) session.getAttribute("language");
+		String locale = (String) session.getAttribute(LANGUAGE);
 
 		BookService bookService = FactoryService.INSTANCE.getBookService();
 		List<UserBook> books = null;
 		try {
 			books = bookService.getAllBook(locale);
-
 			request.setAttribute("allBooks", books);
-	
-			request.getRequestDispatcher("allBookPage").forward(request, response);
+
+			request.getRequestDispatcher(ALLBOOKPAGE).forward(request, response);
+
 		} catch (ServiceException e) {
 			LOG.error("Service Exception", e);
-			
+
 		}
 
 	}

@@ -2,6 +2,8 @@ package com.epam.finalweb.service;
 
 import java.util.List;
 
+import com.epam.finalweb.domain.Book;
+import com.epam.finalweb.domain.BookType;
 import com.epam.finalweb.domain.UserRegistrationForm;
 import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.exception.ValidationException;
@@ -83,6 +85,36 @@ public class Validation {
 
 			throw new ValidationException("Phone Number cannot be Empty");
 		}
+	}
+	public static void validateNewBook(Book book) throws ValidationException{
+		
+		
+		 String bookTitle=book.getBookTitle();
+		 String bookAuthor=book.getBookAuthor();
+		 BookType bookType=book.getBookType();
+	 String bookLanguage=book.getBookLanguage();
+		 String description=book.getDescription();
+		 if (bookTitle == null || bookTitle.isEmpty()) {
+
+				throw new ValidationException("bookTitle cannot be Empty");
+			}
+		 if (bookAuthor == null || bookAuthor.isEmpty()) {
+
+				throw new ValidationException("bookAuthor cannot be Empty");
+			}
+		 if (bookType == null ) {
+
+				throw new ValidationException("bookType cannot be Empty");
+			}
+		 if (bookLanguage == null || bookLanguage.isEmpty()) {
+
+				throw new ValidationException("bookLanguage  cannot be Empty");
+			}
+		 if (description == null || description.isEmpty()) {
+
+				throw new ValidationException("description cannot be Empty");
+			}
+		
 	}
 
 }

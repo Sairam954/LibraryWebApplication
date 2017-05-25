@@ -49,6 +49,7 @@
 </script>
 
 <style>
+
 body {
 	padding-top: 100px;
 }
@@ -169,6 +170,12 @@ body {
 	background-size: cover;
 }
 </style>
+<c:if test="${sessionScope.get('userName') != null && sessionScope.get('userType') ne 'admin' }">
+    <c:redirect url="/LoginSucessUserPage"/>
+</c:if>
+<c:if test="${sessionScope.get('userName') != null && sessionScope.get('userType') == 'admin'}">
+    <c:redirect url="/LoginSucessAdminPage"/>
+</c:if>
 </head>
 <body>
 

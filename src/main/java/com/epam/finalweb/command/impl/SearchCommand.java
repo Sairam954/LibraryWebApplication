@@ -20,17 +20,23 @@ public class SearchCommand implements Command {
 
 	private static final Logger LOG=Logger.getLogger(SearchCommand.class);
 	private static final String SEARCH_PAGE="searchPage";
+	private static final String SEARCH="search";
+	private static final String SEARCHBOOKS="searchbooks";
+	private static final String USERID="userId";
+	
+	
+	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String searchText=request.getParameter("search");
+		String searchText=request.getParameter(SEARCH);
 		
 		HttpSession session = request.getSession(false);
-		String userID=(String) session.getAttribute("userId");
+		String userID=(String) session.getAttribute(USERID);
 		int userId=Integer.parseInt(userID);
 		BookService bookService=FactoryService.INSTANCE.getBookService();
 		try {
 			List<Book> searchedBook=bookService.searchBook(searchText, userId);
 			
-			request.setAttribute("searchbooks",searchedBook);
+			request.setAttribute(SEARCHBOOKS,searchedBook);
 			if(searchedBook.isEmpty())
 			{
 				session.setAttribute("notFound","Sorry Search Book Not Found");

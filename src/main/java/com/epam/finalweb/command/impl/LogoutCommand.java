@@ -12,6 +12,8 @@ import com.epam.finalweb.command.Command;
 
 public class LogoutCommand implements Command{
 
+	private static final String INDEXPAGE="index.jsp";
+	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Cookie[] cookies = request.getCookies();
     	if(cookies != null){
@@ -29,7 +31,7 @@ public class LogoutCommand implements Command{
     	}
     	
     	
-    	response.sendRedirect("index.jsp");
+    	response.sendRedirect(INDEXPAGE);
 		
 	}
 

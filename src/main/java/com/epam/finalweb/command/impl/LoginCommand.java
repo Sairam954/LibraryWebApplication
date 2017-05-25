@@ -28,11 +28,19 @@ public class LoginCommand implements Command {
 	
 	private static final String LOGIN_USERSUCESS_PAGE="LoginSucessUserPage";
 	private static final String LOGIN_ADMINSUCESS_PAGE="LoginSucessAdminPage";
-	
+	private static final String EMAILID="emailId";
+	private static final String PASSWORD="password";
+	private static final String USERNAME="userName";
+	private static final String USERTYPE="userType";
+	private static final String ISLOGED="isLoged";
+	private static final String LANGUAGE="language";
+	private static final String USERID="userId";
+	private static final String ERRORMESSAGE="errorMessage";
+	private static final String INDEXPAGE="index.jsp";
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String emailId = request.getParameter("emailId");
-		String password = request.getParameter("password");
+		String emailId = request.getParameter(EMAILID);
+		String password = request.getParameter(PASSWORD);
 
 		UserService userService = FactoryService.INSTANCE.getUserService();
 		BookService bookService = FactoryService.INSTANCE.getBookService();
@@ -43,18 +51,19 @@ public class LoginCommand implements Command {
 
 			HttpSession session = request.getSession();
 
-			session.setAttribute("userName", user.getUserName());
-			session.setAttribute("userType", user.getUserType());
-			session.setAttribute("isLoged", true);
+			session.setAttribute(USERNAME, user.getUserName());
+			session.setAttribute(USERTYPE, user.getUserType().toString().toLowerCase());
+			session.setAttribute(ISLOGED, true);
 			session.setMaxInactiveInterval(30 * 60);
 			
-			String locale = (String) session.getAttribute("language");
+			String locale = (String) session.getAttribute(LANGUAGE);
 			
 
 			
 			books = bookService.getBookOfUser(user.getId(), locale);
-			session.setAttribute("userId", String.valueOf(user.getId()));
+			session.setAttribute(USERID, String.valueOf(user.getId()));
 			session.setAttribute("books", books);
+			
 			Cookie userName = new Cookie("user", user.getUserName());
 			response.addCookie(userName);
 			System.out.println(books.toString());
@@ -77,15 +86,15 @@ public class LoginCommand implements Command {
 
 		}catch (ServiceException e) {
 			LOG.error("Wrong Password ");
-			request.setAttribute("errorMessage", "Wrong Password Please Enter Correct Password");
+			request.setAttribute(ERRORMESSAGE, "Wrong Password Please Enter Correct Password");
 
 		} catch (ValidationException e) {
-			request.setAttribute("errorMessage", "Email is  not valid ");
+			request.setAttribute(ERRORMESSAGE, "Email is  not valid ");
 			
 		}
 		if (user == null) {
 
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.getRequestDispatcher(INDEXPAGE).forward(request, response);
 		}
 
 	}

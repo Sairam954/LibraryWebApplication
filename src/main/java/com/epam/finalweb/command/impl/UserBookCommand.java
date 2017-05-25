@@ -17,16 +17,21 @@ import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.factory.FactoryService;
 
 public class UserBookCommand implements Command {
-private static final Logger LOG=Logger.getLogger(UserBookCommand.class);
+	private static final Logger LOG = Logger.getLogger(UserBookCommand.class);
+	private static final String LANGUAGE = "language";
+	private static final String USERID = "userId";
+	private static final String USERBOOKS="userBooks";
+	private static final String USERBOOKPAGE="userBookPage";
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		String userID = (String)session.getAttribute("userId");
-		int userId=Integer.parseInt(userID);
-		String locale = (String) session.getAttribute("language");
-		BookService bookService=FactoryService.INSTANCE.getBookService();
-		List<Book> books=null;
-		
+		String userID = (String) session.getAttribute(USERID);
+		int userId = Integer.parseInt(userID);
+		String locale = (String) session.getAttribute(LANGUAGE);
+		BookService bookService = FactoryService.INSTANCE.getBookService();
+		List<Book> books = null;
+
 		try {
 			books = bookService.getBookOfUser(userId, locale);
 			if (books.isEmpty()) {
@@ -34,12 +39,12 @@ private static final Logger LOG=Logger.getLogger(UserBookCommand.class);
 			} else {
 				session.removeAttribute("libraryEmpty");
 			}
-			request.setAttribute("userBooks", books);
-			request.getRequestDispatcher("userBookPage").forward(request, response);
+			request.setAttribute(USERBOOKS, books);
+			request.getRequestDispatcher(USERBOOKPAGE).forward(request, response);
 		} catch (ServiceException e) {
-			LOG.error("Service Exception",e);
+			LOG.error("Service Exception", e);
 		}
-		
+
 	}
 
 }

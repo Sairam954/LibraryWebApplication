@@ -39,23 +39,27 @@ public class LoginCheckFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		System.out.println("Login check filter");
 		HttpSession session = req.getSession(false);
 
-		if (session.getAttribute("isLoged") != null) {
-			UserType userType = (UserType) session.getAttribute("userType");
+		if (session != null) {
+			if (session.getAttribute("isLoged") != null) {
+				UserType userType = (UserType) session.getAttribute("userType");
 
-			if (userType == UserType.USER) {
-				res.sendRedirect("LoginSucessUserPage");
+				if (userType == UserType.USER) {
+					res.sendRedirect("LoginSucessUserPage");
 
-			} else {
-				res.sendRedirect("LoginSucessAdminPage");
+				} else {
+					res.sendRedirect("LoginSucessAdminPage");
+
+				}
 
 			}
-
 		} else {
 
 			chain.doFilter(request, response);
 		}
+
 	}
 
 	/**

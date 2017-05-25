@@ -21,7 +21,13 @@ import com.epam.finalweb.domain.UserBook;
 public class BookDaoImpl implements BookDao {
 
 	private static final Logger LOG = Logger.getLogger(BookDaoImpl.class);
-
+	private static final String BOOK_ID="book_id";
+	private static final String BOOK_TITLE="book_title";
+	private static final String BOOK_AUTHOR="book_author";
+	private static final String BOOK_TYPE="book_type";
+	private static final String BOOK_LANGUAGE="book_language";
+	private static final String	BOOK_DESCRIPTION="book_description";						
+	private static final String USERS="users";
 	public List<Book> getBooksOfUser(int userId, String language) throws DaoException {
 
 		Connection con = null;
@@ -38,12 +44,12 @@ public class BookDaoImpl implements BookDao {
 			books = new ArrayList<Book>();
 			while (rs.next()) {
 				book = new Book();
-				book.setBookId(rs.getInt("book_id"));
-				book.setBookTitle(rs.getString("book_title"));
-				book.setBookAuthor(rs.getString("book_author"));
-				book.setBookType(BookType.valueOf(rs.getString("book_type").toUpperCase()));
-				book.setBookLanguage(rs.getString("book_language"));
-				book.setDescription(rs.getString("book_description"));
+				book.setBookId(rs.getInt(BOOK_ID));
+				book.setBookTitle(rs.getString(BOOK_TITLE));
+				book.setBookAuthor(rs.getString(BOOK_AUTHOR));
+				book.setBookType(BookType.valueOf(rs.getString(BOOK_TYPE).toUpperCase()));
+				book.setBookLanguage(rs.getString(BOOK_LANGUAGE));
+				book.setDescription(rs.getString(BOOK_DESCRIPTION));
 
 				books.add(book);
 			}
@@ -90,12 +96,12 @@ public class BookDaoImpl implements BookDao {
 			while (rs.next()) {
 
 				book = new Book();
-				book.setBookId(rs.getInt("book_id"));
-				book.setBookTitle(rs.getString("book_title"));
-				book.setBookAuthor(rs.getString("book_author"));
-				book.setBookType(BookType.valueOf(rs.getString("book_type").toUpperCase()));
-				book.setBookLanguage(rs.getString("book_language"));
-				book.setDescription(rs.getString("book_description"));
+				book.setBookId(rs.getInt(BOOK_ID));
+				book.setBookTitle(rs.getString(BOOK_TITLE));
+				book.setBookAuthor(rs.getString(BOOK_AUTHOR));
+				book.setBookType(BookType.valueOf(rs.getString(BOOK_TYPE).toUpperCase()));
+				book.setBookLanguage(rs.getString(BOOK_LANGUAGE));
+				book.setDescription(rs.getString(BOOK_DESCRIPTION));
 
 				books.add(book);
 
@@ -143,15 +149,15 @@ public class BookDaoImpl implements BookDao {
 
 			while (rs.next()) {
 				book = new Book();
-				userBook = new UserBook();
-				book.setBookId(rs.getInt("book_id"));
-				book.setBookTitle(rs.getString("book_title"));
-				book.setBookAuthor(rs.getString("book_author"));
-				book.setBookType(BookType.valueOf(rs.getString("book_type").toUpperCase()));
-				book.setBookLanguage(rs.getString("book_language"));
-				book.setDescription(rs.getString("book_description"));
-				userBook.setBook(book);
-				userBook.setUserList(rs.getString("users"));
+				
+				book.setBookId(rs.getInt(BOOK_ID));
+				book.setBookTitle(rs.getString(BOOK_TITLE));
+				book.setBookAuthor(rs.getString(BOOK_AUTHOR));
+				book.setBookType(BookType.valueOf(rs.getString(BOOK_TYPE).toUpperCase()));
+				book.setBookLanguage(rs.getString(BOOK_LANGUAGE));
+				book.setDescription(rs.getString(BOOK_DESCRIPTION));
+				userBook = new UserBook(book,rs.getString(USERS));
+				
 				books.add(userBook);
 			}
 
@@ -175,6 +181,7 @@ public class BookDaoImpl implements BookDao {
 			}
 
 		}
+		
 		return books;
 	}
 
@@ -184,7 +191,7 @@ public class BookDaoImpl implements BookDao {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		PreparedStatement st = null;
 		try {
-			System.out.println("userId" + userId + "bookId" + bookId);
+			
 			con = connectionPool.getConnection();
 			st = con.prepareStatement(BookDaoUtil.ADD_BOOK);
 			st.setInt(1, bookId);
@@ -220,7 +227,7 @@ public class BookDaoImpl implements BookDao {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		PreparedStatement st = null;
 		try {
-			System.out.println("userId" + userId + "bookId" + bookId);
+			
 			con = connectionPool.getConnection();
 			st = con.prepareStatement(BookDaoUtil.REMOVE_BOOK);
 			st.setInt(1, bookId);
@@ -249,5 +256,183 @@ public class BookDaoImpl implements BookDao {
 		}
 
 	}
+
+	@Override
+	public void createBook(Book book) throws DaoException {
+		Connection con = null;
+		
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement st = null;
+		try {
+			
+			con = connectionPool.getConnection();
+			st = con.prepareStatement(BookDaoUtil.CREATE_BOOK);
+			
+			st.setString(1,book.getBookTitle());
+			st.setString(2,book.getBookAuthor());
+			st.setString(3,book.getBookType().toString());
+			st.setString(4,book.getBookLanguage());
+			st.setString(5,book.getDescription());
+			
+			
+			st.executeUpdate();
+			
+
+		} catch (PoolException e) {
+			throw new DaoException("Cannot get connection from pool", e);
+		} catch (SQLException e) {
+			throw new DaoException("Cannot create Prepared Statement", e);
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					LOG.error("Cannot close Prepared Statement");
+				}
+
+			}
+			try {
+				connectionPool.returnConnection(con);
+			} catch (PoolException e) {
+				LOG.error("Cannot return the Connection", e);
+			}
+
+		}
+	}
+	@Override
+	public List<Book> getAllBookAdmin(String language) throws DaoException {
+
+		Connection con = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement st = null;
+		Book book;
+	
+		List<Book> books = null;
+		try {
+			con = connectionPool.getConnection();
+			st = con.prepareStatement(BookDaoUtil.ALL_BOOKADMIN);
+
+			st.setString(1, language);
+			ResultSet rs = st.executeQuery();
+			books = new ArrayList<Book>();
+
+			while (rs.next()) {
+				book = new Book();
+				
+				book.setBookId(rs.getInt(BOOK_ID));
+				book.setBookTitle(rs.getString(BOOK_TITLE));
+				book.setBookAuthor(rs.getString(BOOK_AUTHOR));
+				book.setBookType(BookType.valueOf(rs.getString(BOOK_TYPE).toUpperCase()));
+				book.setBookLanguage(rs.getString(BOOK_LANGUAGE));
+				book.setDescription(rs.getString(BOOK_DESCRIPTION));
+				
+				
+				books.add(book);
+			}
+			
+
+		} catch (SQLException e) {
+			throw new DaoException("Cannot create Prepared Statement", e);
+		} catch (PoolException e) {
+			throw new DaoException("Cannot get connection from pool", e);
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					LOG.error("Cannot close Prepared Statement");
+				}
+
+			}
+			try {
+				connectionPool.returnConnection(con);
+			} catch (PoolException e) {
+				LOG.error("Cannot return the Connection", e);
+			}
+
+		}
+		return books;
+	}
+
+	@Override
+	public void deleteBook(int bookId) throws DaoException {
+		Connection con = null;
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement st = null;
+		try {
+			con = connectionPool.getConnection();
+			st = con.prepareStatement(BookDaoUtil.DELETE_BOOK);
+			st.setInt(1,bookId);
+			st.executeUpdate();
+			System.out.println("execute");
+		}catch (SQLException e) {
+			throw new DaoException("Cannot create Prepared Statement", e);
+		} catch (PoolException e) {
+			throw new DaoException("Cannot get connection from pool", e);
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					LOG.error("Cannot close Prepared Statement");
+				}
+
+			}
+			try {
+				connectionPool.returnConnection(con);
+			} catch (PoolException e) {
+				LOG.error("Cannot return the Connection", e);
+			}
+
+		}
+	
+
+		
+	
+	}
+
+	@Override
+	public void updateBook(Book book) throws DaoException {
+Connection con = null;
+		
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		PreparedStatement st = null;
+		try {
+			
+			con = connectionPool.getConnection();
+			st = con.prepareStatement(BookDaoUtil.UPDATE_BOOK);
+			
+			st.setString(1,book.getBookTitle());
+			st.setString(2,book.getBookAuthor());
+			st.setString(3,book.getBookType().toString());
+			st.setString(4,book.getBookLanguage());
+			st.setString(5,book.getDescription());
+			st.setInt(6, book.getBookId());
+			
+			st.executeUpdate();
+			
+
+		} catch (PoolException e) {
+			throw new DaoException("Cannot get connection from pool", e);
+		} catch (SQLException e) {
+			throw new DaoException("Cannot create Prepared Statement", e);
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					LOG.error("Cannot close Prepared Statement");
+				}
+
+			}
+			try {
+				connectionPool.returnConnection(con);
+			} catch (PoolException e) {
+				LOG.error("Cannot return the Connection", e);
+			}
+
+		}
+	}
+
 
 }

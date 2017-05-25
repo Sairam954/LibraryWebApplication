@@ -21,7 +21,11 @@ import com.epam.finalweb.domain.UserType;
 public class UserDaoImpl implements UserDao {
 
 	private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
-	
+	private static final String USER_ID="user_id";
+	private static final String USER_NAME="user_name";
+	private static final String USER_EMAIL="user_email";
+	private static final String USER_TYPE="user_type";
+	private static final String USER_PHONENUMBER="user_phonenumber";
 	public User getUser(String emailId, String password) throws DaoException {
 		Connection con = null;
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -37,12 +41,12 @@ public class UserDaoImpl implements UserDao {
 			ResultSet rs = st.executeQuery();
 			rs.next();
 			User user = new User();
-			user.setId(rs.getInt("user_id"));
-			user.setUserName(rs.getString("user_name"));
-			user.setUserEmail(rs.getString("user_email"));
+			user.setId(rs.getInt(USER_ID));
+			user.setUserName(rs.getString(USER_NAME));
+			user.setUserEmail(rs.getString(USER_EMAIL));
 
-			user.setUserType(UserType.valueOf(rs.getString("user_type").toUpperCase()));
-			user.setPhoneNumber(rs.getLong("user_phonenumber"));
+			user.setUserType(UserType.valueOf(rs.getString(USER_TYPE).toUpperCase()));
+			user.setPhoneNumber(rs.getLong(USER_PHONENUMBER));
 			return user;
 		} catch (SQLException e) {
 			throw new DaoException("Cannot create Prepared Statement", e);

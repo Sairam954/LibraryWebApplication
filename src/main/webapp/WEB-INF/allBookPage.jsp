@@ -126,10 +126,10 @@ body {
 						<td>
 
 							<button type="button" class="btn btn-info btn-sm"
-								data-toggle="modal" data-target="#myModal">More Info</button>
+								data-toggle="modal" data-target="#${book.book.bookId}">More Info</button>
 
 							<!-- Modal -->
-							<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal fade" id="${book.book.bookId}" role="dialog">
 								<div class="modal-dialog">
 
 									<!-- Modal content-->
