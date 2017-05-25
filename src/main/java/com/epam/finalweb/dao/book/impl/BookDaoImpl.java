@@ -364,7 +364,7 @@ public class BookDaoImpl implements BookDao {
 			st = con.prepareStatement(BookDaoUtil.DELETE_BOOK);
 			st.setInt(1,bookId);
 			st.executeUpdate();
-			System.out.println("execute");
+			
 		}catch (SQLException e) {
 			throw new DaoException("Cannot create Prepared Statement", e);
 		} catch (PoolException e) {

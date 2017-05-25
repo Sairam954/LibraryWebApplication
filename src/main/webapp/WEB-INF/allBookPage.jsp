@@ -55,6 +55,11 @@ body {
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
+			<li class="dropdown"><a href="user?commandName=userBook"><button
+						type="button" class="btn btn-warning btn-sm">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+					</button></a></li>
 
 
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -84,23 +89,21 @@ body {
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">${userName} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><form class="form-group" action="logout" method="post">
-							<input type="hidden" name="commandName" value="Logout" />
-							<button type="submit">${logout}</button>
-
+					<li><a href="user?commandName=accountDetails">Account Details</a></li>
+					<li><a href="logout?commandName=logout">${logout}</a>
 						</form></li>
 
 				</ul></li>
 		</ul>
 	</div>
-<div class="container">
-		<a href="user?commandName=userBook"><button type="button"
-				class="btn btn-primary  btn-lg pull-right">Your Books</button> </a>
-	</div>
 
 
 
 	<!-- /.navbar-collapse --> </nav>
+	<div class="container">
+		<a href="user?commandName=userBook"><button type="button"
+				class="btn btn-primary  btn-lg pull-left">Your Books</button> </a>
+	</div>
 
 
 	<div class="container">
@@ -126,9 +129,8 @@ body {
 						<td>
 
 							<button type="button" class="btn btn-info btn-sm"
-								data-toggle="modal" data-target="#${book.book.bookId}">More Info</button>
-
-							<!-- Modal -->
+								data-toggle="modal" data-target="#${book.book.bookId}">More
+								Info</button> <!-- Modal -->
 							<div class="modal fade" id="${book.book.bookId}" role="dialog">
 								<div class="modal-dialog">
 
@@ -170,8 +172,8 @@ body {
 								var="userId" value="${userId}" /> <c:choose>
 								<c:when test="${!fn:contains(userList, userId)}">
 									<a href="user?commandName=addbook&bookId=${book.book.bookId}"><button
-											type="button" class="btn btn-success  btn-sm ">Add Book</button>
-									</a></td>
+											type="button" class="btn btn-success  btn-sm ">Add
+											Book</button> </a></td>
 						</c:when>
 
 						<c:otherwise>

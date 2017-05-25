@@ -28,8 +28,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	
-	
+
+
 <title>${userName}Library</title>
 <style>
 body {
@@ -55,16 +55,19 @@ body {
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
+			<li class="dropdown"><a href="user?commandName=userBook"><button
+						type="button" class="btn btn-warning btn-sm">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 
+					</button></a></li>
 
-			<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="">English</a></li>
-          <li><a href="">Hindi</a></li>
-        
-        </ul>
-      </li>
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+				data-toggle="dropdown">Language<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="">English</a></li>
+					<li><a href="">Hindi</a></li>
+
+				</ul></li>
 		</ul>
 		<div class="col-sm-3 col-md-3">
 			<form class="navbar-form" role="search" action="search">
@@ -85,10 +88,8 @@ body {
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">${userName} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><form class="form-group" action="logout" method="post">
-							<input type="hidden" name="commandName" value="Logout" />
-							<button type="submit">${logout}</button>
-
+					<li><a href="user?commandName=accountDetails">Account Details</a></li>
+					<li><a href="logout?commandName=logout">${logout}</a>
 						</form></li>
 
 				</ul></li>
@@ -118,30 +119,29 @@ body {
 	</div>
 
 
-<div class="container">
-	<table class="table table-hover">
-		<thead class="thead-inverse table-active">
+	<div class="container">
+		<table class="table table-hover">
+			<thead class="thead-inverse table-active">
 
-			<tr>
-
-				<th>${booktitle}</th>
-				<th>${author}</th>
-				<th>${moreinfo}</th>
-				<th>${action}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="book" items="${books}">
 				<tr>
 
-					<td>${book.bookTitle}</td>
-					<td>${book.bookAuthor}</td>
-					<td>
+					<th>${booktitle}</th>
+					<th>${author}</th>
+					<th>${moreinfo}</th>
+					<th>${action}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="book" items="${books}">
+					<tr>
+
+						<td>${book.bookTitle}</td>
+						<td>${book.bookAuthor}</td>
+						<td>
 
 							<button type="button" class="btn btn-info btn-sm"
-								data-toggle="modal" data-target="#${book.bookId}">More Info</button>
-
-							<!-- Modal -->
+								data-toggle="modal" data-target="#${book.bookId}">More
+								Info</button> <!-- Modal -->
 							<div class="modal fade" id="${book.bookId}" role="dialog">
 								<div class="modal-dialog">
 
@@ -179,16 +179,16 @@ body {
 							</div>
 
 						</td>
-					<td><a
-						href="user?commandName=removebook&bookId=${book.bookId}"><button
-								type="button" class="btn btn-danger btn-sm ">${removebook}</button>
-					</a></td>
+						<td><a
+							href="user?commandName=removebook&bookId=${book.bookId}"><button
+									type="button" class="btn btn-danger btn-sm ">${removebook}</button>
+						</a></td>
 
-				</tr>
+					</tr>
 
-			</c:forEach>
-		</tbody>
-	</table>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

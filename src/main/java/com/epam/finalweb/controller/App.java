@@ -5,7 +5,8 @@ import com.epam.finalweb.domain.BookType;
 public class App  {
 
 	public static void main(String[] args)  {
-		
+		B a=new B();
+		a.setA(3);
 	}
 	
 }

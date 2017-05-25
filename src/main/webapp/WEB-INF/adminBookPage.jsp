@@ -74,29 +74,14 @@ label {
         </ul>
       </li> -->
 		</ul>
-		<div class="col-sm-3 col-md-3">
-			<form class="navbar-form" role="search" action="search">
-				<div class="input-group">
-					<input type="hidden" name="commandName" value="search" /> <input
-						type="text" class="form-control" placeholder="${search}"
-						name="search">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
+		
 		<ul class="nav navbar-nav navbar-right">
 
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">${userName} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><form class="form-group" action="logout" method="post">
-							<input type="hidden" name="commandName" value="Logout" />
-							<button type="submit">${logout}</button>
-
+					<li><a href="admin?commandName=accountDetails">Account Details</a></li>
+					<li><a href="logout?commandName=logout">${logout}</a>
 						</form></li>
 
 				</ul></li>
