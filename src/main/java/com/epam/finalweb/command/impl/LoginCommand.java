@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -62,8 +62,7 @@ public class LoginCommand implements Command {
 			
 			session.setAttribute("books", books);
 
-			Cookie userName = new Cookie("user", user.getUserName());
-			response.addCookie(userName);
+			
 
 			if (books.isEmpty()) {
 				session.setAttribute("libraryEmpty", "You Dont have anything in Your Library");
