@@ -3,17 +3,21 @@ package com.epam.finalweb.command;
 import java.util.EnumMap;
 
 import com.epam.finalweb.command.Command;
+import com.epam.finalweb.command.impl.AccountDetailsCommand;
 import com.epam.finalweb.command.impl.AddBookCommand;
 import com.epam.finalweb.command.impl.AllBookAdminCommand;
 import com.epam.finalweb.command.impl.AllBookCommand;
+import com.epam.finalweb.command.impl.AllUserCommand;
 import com.epam.finalweb.command.impl.CreateBookCommand;
 import com.epam.finalweb.command.impl.DeleteBookCommand;
 import com.epam.finalweb.command.impl.LoginCommand;
 import com.epam.finalweb.command.impl.LogoutCommand;
 import com.epam.finalweb.command.impl.RegisterCommand;
 import com.epam.finalweb.command.impl.RemoveBookCommand;
+import com.epam.finalweb.command.impl.SearchAllCommand;
 import com.epam.finalweb.command.impl.SearchCommand;
 import com.epam.finalweb.command.impl.UpdateBookCommand;
+import com.epam.finalweb.command.impl.UpdateUserCommand;
 import com.epam.finalweb.command.impl.UserBookCommand;
 
 public class CommandProvider {
@@ -35,6 +39,10 @@ public class CommandProvider {
 		commands.put(AvailableCommand.ALLBOOKADMIN, new AllBookAdminCommand());
 		commands.put(AvailableCommand.DELETEBOOK, new DeleteBookCommand());
 		commands.put(AvailableCommand.UPDATEBOOK, new UpdateBookCommand());
+		commands.put(AvailableCommand.ACCOUNTDETAILS, new AccountDetailsCommand());
+		commands.put(AvailableCommand.UPDATEUSER, new UpdateUserCommand());
+		commands.put(AvailableCommand.SEARCHALL, new SearchAllCommand());
+		commands.put(AvailableCommand.ALLUSER, new AllUserCommand());
 		
 	}
 

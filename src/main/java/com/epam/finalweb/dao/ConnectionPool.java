@@ -98,7 +98,6 @@ public class ConnectionPool {
 
 	public void destroy() {
 		for (Connection connection : availableConnection) {
-			System.out.println("destroy avail");
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -106,8 +105,7 @@ public class ConnectionPool {
 			}
 		}
 		for (Connection connection : busyConnection) {
-			System.out.println("destroy busy");
-			try {
+				try {
 				connection.close();
 			} catch (SQLException e) {
 				LOG.error("Cannot Close Connection", e);

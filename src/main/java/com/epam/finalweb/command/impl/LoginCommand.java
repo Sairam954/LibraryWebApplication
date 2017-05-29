@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,19 +24,19 @@ import com.epam.finalweb.service.factory.FactoryService;
 
 public class LoginCommand implements Command {
 	private static final Logger LOG = Logger.getLogger(LoginCommand.class);
-	
-	private static final String LOGIN_USERSUCESS_PAGE="LoginSucessUserPage";
-	private static final String LOGIN_ADMINSUCESS_PAGE="LoginSucessAdminPage";
-	private static final String EMAILID="emailId";
-	private static final String PASSWORD="password";
-	private static final String USERNAME="userName";
-	private static final String USERTYPE="userType";
-	private static final String ISLOGED="isLoged";
-	private static final String LANGUAGE="language";
-	private static final String USERID="userId";
-	private static final String ERRORMESSAGE="errorMessage";
-	private static final String INDEXPAGE="index.jsp";
-	
+
+	private static final String LOGIN_USERSUCESS_PAGE = "LoginSucessUserPage";
+	private static final String LOGIN_ADMINSUCESS_PAGE = "LoginSucessAdminPage";
+	private static final String EMAILID = "emailId";
+	private static final String PASSWORD = "password";
+	private static final String USERNAME = "userName";
+	private static final String USERTYPE = "userType";
+	private static final String ISLOGED = "isLoged";
+	private static final String LANGUAGE = "language";
+	private static final String USERID = "userId";
+	private static final String ERRORMESSAGE = "errorMessage";
+	private static final String INDEXPAGE = "index.jsp";
+
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String emailId = request.getParameter(EMAILID);
 		String password = request.getParameter(PASSWORD);
@@ -53,21 +52,19 @@ public class LoginCommand implements Command {
 
 			session.setAttribute(USERNAME, user.getUserName());
 			session.setAttribute(USERTYPE, user.getUserType().toString().toLowerCase());
+			session.setAttribute(USERID, String.valueOf(user.getId()));
 			session.setAttribute(ISLOGED, true);
 			session.setMaxInactiveInterval(30 * 60);
-			
-			String locale = (String) session.getAttribute(LANGUAGE);
-			
 
-			
+			String locale = (String) session.getAttribute(LANGUAGE);
+
 			books = bookService.getBookOfUser(user.getId(), locale);
-			session.setAttribute(USERID, String.valueOf(user.getId()));
-			session.setAttribute("books", books);
 			
+			session.setAttribute("books", books);
+
 			Cookie userName = new Cookie("user", user.getUserName());
 			response.addCookie(userName);
-			System.out.println(books.toString());
-			
+
 			if (books.isEmpty()) {
 				session.setAttribute("libraryEmpty", "You Dont have anything in Your Library");
 			} else {
@@ -84,13 +81,13 @@ public class LoginCommand implements Command {
 				response.sendRedirect(LOGIN_ADMINSUCESS_PAGE);
 			}
 
-		}catch (ServiceException e) {
+		} catch (ServiceException e) {
 			LOG.error("Wrong Password ");
 			request.setAttribute(ERRORMESSAGE, "Wrong Password Please Enter Correct Password");
 
 		} catch (ValidationException e) {
 			request.setAttribute(ERRORMESSAGE, "Email is  not valid ");
-			
+
 		}
 		if (user == null) {
 

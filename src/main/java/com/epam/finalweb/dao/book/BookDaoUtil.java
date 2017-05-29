@@ -8,7 +8,7 @@ public class BookDaoUtil {
 			+ "book_has_user_details.user_details_user_id=user_details.user_id where user_id=?"
 			+ " and book_language=?";
 
-	public static final String BOOK_SEARCH = "select book_id,book_title,book_author,book_type,"
+	public static final String USERBOOK_SEARCH = "select book_id,book_title,book_author,book_type,"
 			+ "book_language,book_description from (SELECT * FROM book WHERE MATCH"
 			+ " (book_title,book_author,book_description) AGAINST (?)) as"
 			+ " t join book_has_user_details on t.book_id=book_has_user_details.book_book_id " + " join user_details"
@@ -25,7 +25,8 @@ public class BookDaoUtil {
 	public static final String ALL_BOOKADMIN = "select * from book where book_language=?";
 	public static final String DELETE_BOOK = "DELETE FROM `book` WHERE `book_id`=?";
 	public static final String UPDATE_BOOK = "UPDATE `book` SET `book_title`=?, `book_author`=?, `book_type`=?, `book_language`=?, `book_description`=? WHERE `book_id`=?";
-
+	public static final String ALLBOOK_SEARCH = "SELECT * FROM book WHERE MATCH(book_title,book_author,book_description) AGAINST (?)";
+	
 	
 	
 }

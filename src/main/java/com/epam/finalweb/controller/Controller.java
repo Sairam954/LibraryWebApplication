@@ -40,6 +40,19 @@ public class Controller extends HttpServlet {
 
 	}
 
+	
+
+	@Override
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		executeCommand(request, response);
+
+	}
+
+	@Override
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		executeCommand(request, response);
+
+	}
 	private void executeCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

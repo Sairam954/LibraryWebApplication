@@ -1,7 +1,6 @@
 package com.epam.finalweb.service;
 
 import java.util.List;
-
 import com.epam.finalweb.domain.Book;
 import com.epam.finalweb.domain.BookType;
 import com.epam.finalweb.domain.UserRegistrationForm;
@@ -81,7 +80,7 @@ public class Validation {
 
 			throw new ValidationException("Password cannot be Empty");
 		}
-		if (phoneNumber == null) {
+		if (phoneNumber == null || phoneNumber==0 || phoneNumber<0) {
 
 			throw new ValidationException("Phone Number cannot be Empty");
 		}
@@ -114,6 +113,23 @@ public class Validation {
 
 				throw new ValidationException("description cannot be Empty");
 			}
+		
+	}
+	public static void verifyPassword(int userId,String password) throws ValidationException{
+		UserService userService = FactoryService.INSTANCE.getUserService();
+		
+		try {
+			if(!userService.verifyPassword(userId, password))
+				{
+				throw new ValidationException("Password Did not match");
+				};
+		
+		} catch (ServiceException e) {
+			throw new ValidationException("Validation Exception userID ",e);
+		}
+		
+		
+		
 		
 	}
 

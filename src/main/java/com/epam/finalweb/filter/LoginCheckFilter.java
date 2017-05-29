@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.epam.finalweb.domain.UserType;
+
 
 /**
  * Servlet Filter implementation class LoginCheckFilter
@@ -39,26 +39,30 @@ public class LoginCheckFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		System.out.println("Login check filter");
+		
 		HttpSession session = req.getSession(false);
 
 		if (session != null) {
 			if (session.getAttribute("isLoged") != null) {
-				UserType userType = (UserType) session.getAttribute("userType");
-
-				if (userType == UserType.USER) {
-					res.sendRedirect("LoginSucessUserPage");
-
-				} else {
+			String userType = (String) session.getAttribute("userType");
+						String uri=req.getRequestURI();
+				if (userType.equals("admin")&&uri.contains("user")) {
+					
+					
+					
+					
 					res.sendRedirect("LoginSucessAdminPage");
 
+				} else if(userType.equals("admin")&&uri.contains("user")) {
+					res.sendRedirect("LoginSucessAdminPage");
+
+				}else
+				{
+					chain.doFilter(request, response);
 				}
 
 			}
-		} else {
-
-			chain.doFilter(request, response);
-		}
+		} 
 
 	}
 

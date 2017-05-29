@@ -11,6 +11,7 @@ public interface BookService {
 
 	 List<Book> getBookOfUser(int userId,String language) throws ServiceException;
 	 List<Book> searchBook(String searchText,int userId) throws ServiceException;
+	 List<Book> searchAllBook(String searchText) throws ServiceException;
 	 List<UserBook> getAllBook(String language,int userId) throws ServiceException;
 	 List<Book> getAllBookAdmin(String language) throws ServiceException;
 	 void addBook(int bookId,int userId) throws ServiceException;

@@ -29,7 +29,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>${userName}Library</title>
+<title>Complete Library</title>
 <style>
 body {
 	background-repeat: no-repeat;
@@ -48,6 +48,14 @@ body {
 label {
 	width: 70px;
 }
+
+table td {
+	vertical-align: top;
+}
+
+#update, #delete {
+	display: inline;
+}
 </style>
 </head>
 <body>
@@ -63,24 +71,23 @@ label {
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
+			<li class="dropdown"><a href="LoginSucessAdminPage"><button
+						type="button" class="btn btn-warning btn-sm">
+						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+					</button></a></li>
 
 
-			<!-- <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="">English</a></li>
-          <li><a href="">Hindi</a></li>
-        
-        </ul>
-      </li> -->
+
 		</ul>
-		
+
 		<ul class="nav navbar-nav navbar-right">
 
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">${userName} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="admin?commandName=accountDetails">Account Details</a></li>
+					<li><a href="admin?commandName=accountDetails">Account
+							Details</a></li>
 					<li><a href="logout?commandName=logout">${logout}</a>
 						</form></li>
 
@@ -109,15 +116,14 @@ label {
 					<form class="form-horizontal" action="admin?commandName=createBook"
 						method="post">
 						<div class="form-group">
-							<label class="control-label col-sm-2" >Book
-								Title</label>
+							<label class="control-label col-sm-2">Book Title</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="bookTitle"
 									placeholder="Enter Title" name="bookTitle" required>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2" >Author</label>
+							<label class="control-label col-sm-2">Author</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="author"
 									placeholder="Enter Author" name="bookAuthor" required>
@@ -125,7 +131,7 @@ label {
 						</div>
 
 						<div class="form-group">
-							<label class="control-label col-sm-2" >Book Type</label>
+							<label class="control-label col-sm-2">Book Type</label>
 							<div class="col-sm-10">
 
 
@@ -142,7 +148,7 @@ label {
 								Language</label>
 							<div class="col-sm-10">
 								<label> <input type="checkbox" name="bookLanguage"
-									value="English">English
+									value="English" required>English
 								</label>
 
 							</div>
@@ -171,7 +177,7 @@ label {
 	</div>
 
 	</div>
-<c:if test="${errorMessage}!=null">${errorMessage}</c:if>
+	<c:if test="${errorMessage}!=null">${errorMessage}</c:if>
 
 	<div class="container">
 		<h2>All Books</h2>
@@ -238,11 +244,16 @@ label {
 
 
 
-						<td><a
-							href="admin?commandName=deletebook&bookId=${book.bookId}"><button
-									type="button" class="btn btn-danger btn-sm ">${deletebook}</button>
-						</a>
-							<button type="button" class="btn btn-primary btn-sm"
+						<td>
+							<form id="delete"
+								action="admin?commandName=deletebook&bookId=${book.bookId}"
+								method="delete">
+								<input type="hidden" name="commandName" value="deletebook" /> <input
+									type="hidden" name="bookId" value="${book.bookId}" />
+								<button type="submit" class="btn btn-danger btn-sm ">${deletebook}</button>
+
+							</form>
+							<button id="update" type="submit" class="btn btn-primary btn-sm"
 								data-toggle="modal" data-target="#update${book.bookId}">Update
 								Book</button>
 							<div class="modal fade" id="update${book.bookId}" role="dialog">
@@ -255,19 +266,19 @@ label {
 											<h4 class="modal-title">Update Book</h4>
 										</div>
 										<div class="modal-body">
-											<form class="form-horizontal"
-												action="admin?commandName=updateBook&bookId=${book.bookId}"
-												method="post">
+											<form class="form-horizontal" action="admin" method="update">
+												<input type="hidden" name="commandName" value="updatebook" />
+												<input type="hidden" name="bookId" value="${book.bookId}" />
+
 												<div class="form-group">
-													<label class="control-label col-sm-2" >Book
-														Title</label>
+													<label class="control-label col-sm-2">Book Title</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="bookTitle"
 															value="${book.bookTitle}" name="bookTitle" required>
 													</div>
 												</div>
-												<div class="form-group" >
-													<label class="control-label col-sm-2" >Author</label>
+												<div class="form-group">
+													<label class="control-label col-sm-2">Author</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="bookAuthor"
 															value="${book.bookAuthor}" name="bookAuthor" required>
@@ -275,8 +286,7 @@ label {
 												</div>
 
 												<div class="form-group">
-													<label class="control-label col-sm-2" >Book
-														Type</label>
+													<label class="control-label col-sm-2">Book Type</label>
 													<div class="col-sm-10">
 														<SELECT name="bookType" required>
 															<OPTION value="ebook" selected>Ebook</OPTION>
@@ -285,18 +295,18 @@ label {
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-sm-2" >Description</label>
+													<label class="control-label col-sm-2">Description</label>
 													<div class="col-sm-10">
 														<input type="text" class="form-control" id="description"
 															value="${book.description}" name="description">
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-sm-2" checked>Book
+													<label class="control-label col-sm-4" checked>Book
 														Language</label>
 													<div class="col-sm-10">
 														<label class="radio-inline"> <input type="radio"
-															name="bookLanguage" value="English">${book.bookLanguage}
+															name="bookLanguage" value="English" required>${book.bookLanguage}
 														</label>
 
 													</div>
@@ -317,7 +327,8 @@ label {
 									</div>
 
 								</div>
-							</div></td>
+							</div>
+						</td>
 
 
 					</tr>

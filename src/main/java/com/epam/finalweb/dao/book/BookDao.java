@@ -10,6 +10,7 @@ public interface BookDao {
 
 	List<Book> getBooksOfUser(int userId,String language) throws DaoException;
 	List<Book> getSeacrhedBook(int userId,String text) throws DaoException;
+	List<Book> getSeacrhedBook(String text) throws DaoException;
 	List<UserBook> getAllBook(String language,int userId) throws DaoException;
 	void addBook(int bookId,int userId) throws DaoException;
 	void removeBook(int bookId,int userId) throws DaoException;
@@ -17,4 +18,5 @@ public interface BookDao {
 	List<Book> getAllBookAdmin(String language) throws DaoException;
 	void deleteBook(int Id) throws DaoException;
 	void updateBook(Book book) throws DaoException;
+	
 }

@@ -125,13 +125,7 @@ strong {
 		<ul class="nav navbar-nav">
 			
 
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown">Language<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="">English</a></li>
-					<li><a href="">Hindi</a></li>
-
-				</ul></li>
+			
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
@@ -152,6 +146,11 @@ strong {
 
 
 	<!-- /.navbar-collapse --> </nav>
+	<div class="text-danger">
+			<h4>
+				<c:if test="${errorMessage!=null}">${errorMessage}</c:if>
+			</h4>
+		</div>
 	<div class="row">
 		<div class="col-md-12">
 			<h1 align="center">
@@ -163,10 +162,11 @@ strong {
 
 		<div class="row">
 			<div class="col-sm-6">
+			<a href="admin?commandName=alluser">
 				<div class="tile purple">
 					<h3 class="title">User Details</h3>
 
-				</div>
+				</div></a>
 			</div>
 			<div class="col-sm-6">
 				<a href="admin?commandName=allbookadmin">

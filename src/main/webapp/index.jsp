@@ -183,8 +183,7 @@ body {
 		<form>
 			<select id="language" name="language" onchange="submit()">
 				<option value="en_US" ${language == 'en_US' ? 'selected' : ''}>English</option>
-				<option value="be_BY" ${language == 'be_BY' ? 'selected' : ''}>Belarusian</option>
-				<option value="hi_IN" ${language == 'hi_IN' ? 'selected' : ''}>Hindi</option>
+					<option value="hi_IN" ${language == 'hi_IN' ? 'selected' : ''}>Hindi</option>
 			</select>
 		</form>
 	</div>

@@ -18,10 +18,11 @@ import com.epam.finalweb.service.exception.ServiceException;
 import com.epam.finalweb.service.factory.FactoryService;
 
 public class AllBookCommand implements Command {
-	private static Logger LOG = Logger.getLogger(AllBookCommand.class);
+	private static final Logger LOG = Logger.getLogger(AllBookCommand.class);
 	private static final String ALLBOOKPAGE = "allBookPage";
 	private static final String LANGUAGE = "language";
-
+ private static final String ALLBOOKS="allbooks";
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -30,11 +31,12 @@ public class AllBookCommand implements Command {
 
 		BookService bookService = FactoryService.INSTANCE.getBookService();
 		List<UserBook> books = null;
-		String id=(String)session.getAttribute("userId"); 
-		int userId=Integer.parseInt(id);
+		String id = (String) session.getAttribute("userId");
+		int userId = Integer.parseInt(id);
 		try {
-			books = bookService.getAllBook(locale,userId);
-			request.setAttribute("allBooks", books);
+			books = bookService.getAllBook(locale, userId);
+			
+			request.setAttribute(ALLBOOKS, books);
 
 			request.getRequestDispatcher(ALLBOOKPAGE).forward(request, response);
 

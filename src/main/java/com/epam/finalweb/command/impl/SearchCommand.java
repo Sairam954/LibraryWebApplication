@@ -23,7 +23,7 @@ public class SearchCommand implements Command {
 	private static final String SEARCH="search";
 	private static final String SEARCHBOOKS="searchbooks";
 	private static final String USERID="userId";
-	
+	private static final String NOTFOUND="notfound";
 	
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,12 +39,12 @@ public class SearchCommand implements Command {
 			request.setAttribute(SEARCHBOOKS,searchedBook);
 			if(searchedBook.isEmpty())
 			{
-				session.setAttribute("notFound","Sorry Search Book Not Found");
+				session.setAttribute(NOTFOUND,"Sorry Search Book Not Found");
 			}
 			else
 			{
 			
-				session.removeAttribute("notFound");
+				session.removeAttribute(NOTFOUND);
 				
 			}
 			request.getRequestDispatcher(SEARCH_PAGE).forward(request, response);

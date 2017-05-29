@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<UserBook> getAllBook(String locale,int userId) throws ServiceException {
+	public List<UserBook> getAllBook(String locale, int userId) throws ServiceException {
 		String language;
 		if (locale.contains("hi_IN")) {
 			language = "Hindi";
@@ -59,7 +59,7 @@ public class BookServiceImpl implements BookService {
 		try {
 
 			List<UserBook> allBooks = null;
-			allBooks = bookDao.getAllBook(language,userId);
+			allBooks = bookDao.getAllBook(language, userId);
 			return allBooks;
 
 		} catch (DaoException e) {
@@ -92,8 +92,7 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void createBook(Book book) throws ServiceException, ValidationException {
-	
-		System.out.println("author"+book.getBookAuthor());
+
 		Validation.validateNewBook(book);
 		BookDao bookDao = FactoryDao.INSTANCE.getBookDao();
 		try {
@@ -102,9 +101,8 @@ public class BookServiceImpl implements BookService {
 			throw new ServiceException("Cannot create Book to user Library", e);
 		}
 
-		
-		
 	}
+
 	@Override
 	public List<Book> getAllBookAdmin(String locale) throws ServiceException {
 		String language;
@@ -144,6 +142,21 @@ public class BookServiceImpl implements BookService {
 			bookDao.updateBook(book);
 		} catch (DaoException e) {
 			throw new ServiceException("Cannot create Book to user Library", e);
+		}
+	}
+
+	@Override
+	public List<Book> searchAllBook(String searchText) throws ServiceException {
+		BookDao bookDao = FactoryDao.INSTANCE.getBookDao();
+		try {
+
+			List<Book> searchedBooks = new ArrayList<Book>();
+			searchedBooks = bookDao.getSeacrhedBook(searchText);
+
+			return searchedBooks;
+
+		} catch (DaoException e) {
+			throw new ServiceException("Cannot get Books of user", e);
 		}
 	}
 

@@ -58,14 +58,7 @@ body {
 
 					</button></a></li>
 
-			<!-- <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Language<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="">English</a></li>
-          <li><a href="">Hindi</a></li>
-        
-        </ul>
-      </li> -->
+		
       
 		</ul>
 		<div class="col-sm-3 col-md-3">

@@ -55,19 +55,14 @@ body {
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
+		
 			<li class="dropdown"><a href="user?commandName=userBook"><button
 						type="button" class="btn btn-warning btn-sm">
 						<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 
 					</button></a></li>
 
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown">Language<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="">English</a></li>
-					<li><a href="">Hindi</a></li>
-
-				</ul></li>
+			
 		</ul>
 		<div class="col-sm-3 col-md-3">
 			<form class="navbar-form" role="search" action="search">
@@ -104,7 +99,11 @@ body {
 		<a href="user?commandName=allbook"><button type="button"
 				class="btn btn-primary  btn-lg pull-right">Show All Books</button> </a>
 	</div>
-
+<div class="text-danger">
+			<h4>
+				<c:if test="${errorMessage!=null}">${errorMessage}</c:if>
+			</h4>
+		</div>
 
 	<div class="container  text-danger">
 		<h4>

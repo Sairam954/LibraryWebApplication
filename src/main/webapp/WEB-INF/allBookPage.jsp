@@ -62,18 +62,12 @@ body {
 					</button></a></li>
 
 
-			<li class="dropdown"><a href="#" class="dropdown-toggle"
-				data-toggle="dropdown">Language<b class="caret"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="">English</a></li>
-					<li><a href="">Hindi</a></li>
 
-				</ul></li>
 		</ul>
 		<div class="col-sm-3 col-md-3">
 			<form class="navbar-form" role="search" action="search">
 				<div class="input-group">
-					<input type="hidden" name="commandName" value="search" /> <input
+					<input type="hidden" name="commandName" value="searchall" /> <input
 						type="text" class="form-control" placeholder="${search} "
 						name="search">
 					<div class="input-group-btn">
@@ -89,7 +83,8 @@ body {
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">${userName} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="user?commandName=accountDetails">Account Details</a></li>
+					<li><a href="user?commandName=accountDetails">Account
+							Details</a></li>
 					<li><a href="logout?commandName=logout">${logout}</a>
 						</form></li>
 
@@ -121,7 +116,7 @@ body {
 			</thead>
 			<tbody>
 
-				<c:forEach var="book" items="${allBooks}">
+				<c:forEach var="book" items="${allbooks}">
 					<tr>
 
 						<td>${book.book.bookTitle}</td>
@@ -168,7 +163,7 @@ body {
 							</div>
 
 						</td>
-						<td> <c:choose>
+						<td><c:choose>
 								<c:when test="${book.isAdded==false}">
 									<a href="user?commandName=addbook&bookId=${book.book.bookId}"><button
 											type="button" class="btn btn-success  btn-sm ">Add

@@ -21,7 +21,7 @@ public class UpdateBookCommand implements Command {
 	private static final String BOOK_LANGUAGE = "bookLanguage";
 	private static final String BOOK_DESCRIPTION = "description";
 	private static final String BOOK_ID = "bookId";
-
+	private static final String ERRORMESSAGE="errorMessage";
 	private static final String ADMIN_ALLBOOKPAGE = "admin?commandName=allbookadmin";
 
 	@Override
@@ -48,11 +48,11 @@ public class UpdateBookCommand implements Command {
 			bookService.updateBook(updatedBook);
 			response.sendRedirect(ADMIN_ALLBOOKPAGE);
 		} catch (ServiceException e) {
-			request.setAttribute("errorMessage","Could not update the Book please try later" );
+			request.setAttribute(ERRORMESSAGE,"Could not update the Book please try later" );
 			request.getRequestDispatcher(ADMIN_ALLBOOKPAGE).forward(request, response);
 		
 		} catch (ValidationException e) {
-			request.setAttribute("errorMessage","Please Fill all fields of Book" );
+			request.setAttribute(ERRORMESSAGE,"Please Fill all fields of Book" );
 			request.getRequestDispatcher(ADMIN_ALLBOOKPAGE).forward(request, response);
 			
 		}

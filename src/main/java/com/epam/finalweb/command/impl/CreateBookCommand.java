@@ -46,15 +46,14 @@ public class CreateBookCommand implements Command {
 			bookService.createBook(newBook);
 			response.sendRedirect(ADMIN_ALLBOOKPAGE);
 		} catch (ServiceException e) {
-			
-			request.setAttribute("errorMessage","Could not create the Book please try later" );
+
+			request.setAttribute("errorMessage", "Could not create the Book please try later");
 			request.getRequestDispatcher(ADMIN_ALLBOOKPAGE).forward(request, response);
-			
+
 		} catch (ValidationException e) {
-			request.setAttribute("errorMessage","Please Fill all fields of Book" );
+			request.setAttribute("errorMessage", "Please Fill all fields of Book");
 			request.getRequestDispatcher(ADMIN_ALLBOOKPAGE).forward(request, response);
-				
-		
+
 		}
 
 	}
